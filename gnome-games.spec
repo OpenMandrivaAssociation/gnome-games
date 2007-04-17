@@ -6,7 +6,7 @@
 
 Summary:	GNOME games
 Name:		gnome-games
-Version: 2.18.0.1
+Version: 2.18.1
 Release: %mkrel 1
 License:	GPL
 Group:		Games/Other
@@ -22,7 +22,7 @@ Buildrequires:  libglade2.0-devel
 BuildRequires:  gtk+2-devel >= 2.5.4
 BuildRequires:  libexpat-devel
 BuildRequires:	scrollkeeper
-BuildRequires:	gnome-doc-utils libxslt-proc
+BuildRequires:	gnome-doc-utils
 Buildrequires:  librsvg-devel
 Buildrequires:  pygtk2.0-devel gnome-python-desktop
 Buildrequires:  avahi-glib-devel avahi-client-devel
@@ -294,5 +294,3 @@ done
 %attr(664, games, games) %ghost %{gamesdir}/*
 %dir %{_datadir}/omf/%name
 %{_datadir}/omf/*/*-C.omf
-
-
