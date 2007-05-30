@@ -7,7 +7,7 @@
 Summary:	GNOME games
 Name:		gnome-games
 Version: 2.18.2
-Release: %mkrel 1
+Release: %mkrel 2
 License:	GPL
 Group:		Games/Other
 
@@ -108,24 +108,18 @@ cat << EOF >> $RPM_BUILD_ROOT%{_menudir}/%{name}
 ?package(%{name}): title="Blackjack" longtitle="Blackjack" command="%{_bindir}/blackjack" icon="gnome-blackjack.png" needs="x11" section="More Applications/Games/Cards" startup_notify="true" xdg="true"
 EOF
 desktop-file-install --vendor="" \
-  --remove-category="PuzzleGame" \
-  --remove-category="Application" \
   --add-category="X-MandrivaLinux-MoreApplications-Games-Puzzles" \
   --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/{gnomine.desktop,mahjongg.desktop,gnotravex.desktop,gnome-sudoku.desktop}
 desktop-file-install --vendor="" \
-  --remove-category="Application" \
   --add-category="X-MandrivaLinux-MoreApplications-Games-Other" \
   --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/{same-gnome.desktop,gtali.desktop}
 desktop-file-install --vendor="" \
-  --remove-category="Application" \
   --add-category="X-MandrivaLinux-MoreApplications-Games-Arcade" \
   --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/{gnobots2.desktop,gnometris.desktop}
 desktop-file-install --vendor="" \
-  --remove-category="Application" \
   --add-category="X-MandrivaLinux-MoreApplications-Games-Boards" \
   --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/{iagno.desktop,glines.desktop,gnect.desktop,glchess.desktop}
 desktop-file-install --vendor="" \
-  --remove-category="Application" \
   --add-category="X-MandrivaLinux-MoreApplications-Games-Cards" \
   --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/{sol.desktop,blackjack.desktop}
 
@@ -162,7 +156,10 @@ rm -rf $RPM_BUILD_ROOT
 %pre
 [ -d %{gamesdir} ] || mkdir -p %{gamesdir}
 for i in \
-	glines \
+	glines.Small \
+	glines.Medium \
+	glines.Large \
+	glines.Custom \
 	gnibbles.1.0 \
 	gnibbles.1.1 \
 	gnibbles.2.0 \
@@ -196,6 +193,7 @@ for i in \
 	gnotravex.4x4 \
 	gnotravex.5x5 \
 	gnotravex.6x6 \
+	gnotski.10 \
 	gnotski.11 \
 	gnotski.12 \
 	gnotski.13 \
@@ -204,22 +202,46 @@ for i in \
 	gnotski.16 \
 	gnotski.17 \
 	gnotski.1 \
+	gnotski.20 \
 	gnotski.21 \
 	gnotski.22 \
 	gnotski.23 \
 	gnotski.24 \
 	gnotski.25 \
 	gnotski.26 \
+	gnotski.27 \
+	gnotski.28 \
+	gnotski.29 \
 	gnotski.2 \
+	gnotski.30 \
+	gnotski.31 \
+	gnotski.32 \
+	gnotski.33 \
+	gnotski.34 \
+	gnotski.35 \
+	gnotski.36 \
+	gnotski.37 \
 	gnotski.3 \
 	gnotski.4 \
 	gnotski.5 \
 	gnotski.6 \
 	gnotski.7 \
-	gtali \
-	mahjongg.difficult \
+	gnotski.8 \
+	gnotski.9 \
+	gtali.Regular \
+	gtali.Colors \
 	mahjongg.easy \
-	same-gnome \
+	mahjongg.difficult \
+	mahjongg.confounding \
+	mahjongg.pyramid \
+	mahjongg.tictactoe \
+	mahjongg.cloud \
+	mahjongg.dragon \
+	mahjongg.bridges \
+	mahjongg.ziggurat \
+	same-gnome.Small \
+	same-gnome.Medium \
+	same-gnome.Large \
 ; do
 	%create_ghostfile %{gamesdir}/$i.scores games games 0664
 	if [ -f "%{gamesdir}/$i.scores" -a ! -s "%{gamesdir}/$i.scores" ]; then
