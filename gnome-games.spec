@@ -1,13 +1,13 @@
 %define enable_gnometris 1
 
-%define schemas aisleriot blackjack glines gnect gnibbles gnobots2 gnometris gnomine gnotravex gnotski gtali iagno libgnomegames mahjongg same-gnome glchess
+%define schemas aisleriot blackjack glines gnect gnibbles gnobots2 gnometris gnomine gnotravex gnotski gtali iagno mahjongg same-gnome glchess
 
 %define gamesdir	%{_localstatedir}/games
 
 Summary:	GNOME games
 Name:		gnome-games
-Version: 2.18.2
-Release: %mkrel 2
+Version: 2.19.3
+Release: %mkrel 1
 License:	GPL
 Group:		Games/Other
 
@@ -26,6 +26,8 @@ BuildRequires:	gnome-doc-utils
 Buildrequires:  librsvg-devel
 Buildrequires:  pygtk2.0-devel gnome-python-desktop
 Buildrequires:  avahi-glib-devel avahi-client-devel
+Buildrequires:  libgstreamer0.10-devel
+Buildrequires:  libgcrypt-devel
 Buildrequires:  perl-XML-Parser
 BuildRequires:  gob2
 BuildRequires:  automake1.7
@@ -265,11 +267,9 @@ done
 %{_sysconfdir}/gconf/schemas/gnotski.schemas
 %{_sysconfdir}/gconf/schemas/gtali.schemas
 %{_sysconfdir}/gconf/schemas/iagno.schemas
-%{_sysconfdir}/gconf/schemas/libgnomegames.schemas
 %{_sysconfdir}/gconf/schemas/mahjongg.schemas
 %{_sysconfdir}/gconf/schemas/same-gnome.schemas
 
-%config(noreplace) %{_sysconfdir}/sound/events/*
 %{_bindir}/sol
 %{_bindir}/gnect
 %{_bindir}/blackjack
@@ -302,7 +302,6 @@ done
 %{_datadir}/glchess
 %{_datadir}/gnome-games
 %{_datadir}/gnome-sudoku
-%{_datadir}/blackjack
 %{_datadir}/gnect
 %{_datadir}/gnibbles
 %{_datadir}/gnobots2
@@ -311,8 +310,8 @@ done
 %{_iconsdir}/*.png
 %{_liconsdir}/*.png
 %{_miconsdir}/*.png
-%{_datadir}/sol-games
-%{_datadir}/sounds/*
 %attr(664, games, games) %ghost %{gamesdir}/*
 %dir %{_datadir}/omf/%name
 %{_datadir}/omf/*/*-C.omf
+%_datadir/gnome-games-common/
+%_libdir/gnome-games
