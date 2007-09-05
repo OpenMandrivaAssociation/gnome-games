@@ -7,7 +7,7 @@
 Summary:	GNOME games
 Name:		gnome-games
 Version: 2.19.92
-Release: %mkrel 1
+Release: %mkrel 2
 License:	GPL
 Group:		Games/Other
 
@@ -92,38 +92,6 @@ rm -rf  $RPM_BUILD_ROOT%{_datadir}/applications/gnometris.desktop \
   $RPM_BUILD_ROOT%{_datadir}/pixmaps/gnometris \
   $RPM_BUILD_ROOT%{gamesdir}/gnometris.scores
 %endif
-
-install -m 755 -d $RPM_BUILD_ROOT%{_menudir}
-cat << EOF >> $RPM_BUILD_ROOT%{_menudir}/%{name}
-?package(%{name}): title="GNOME Mines" longtitle="Mines game" command="%{_bindir}/gnomine" icon="gnome-gnomine.png" needs="x11" section="More Applications/Games/Puzzles" startup_notify="true" xdg="true"
-?package(%{name}): title="Same GNOME" longtitle="GNOME SameGame" command="%{_bindir}/same-gnome" icon="gnome-gsame.png" needs="x11" section="More Applications/Games/Other" startup_notify="true" xdg="true"
-?package(%{name}): title="GNOME Mahjongg" longtitle="Mahjongg game" command="%{_bindir}/mahjongg" icon="gnome-mahjongg.png" kde_info="GNOME Mahjongg game" needs="x11" section="More Applications/Games/Puzzles" startup_notify="true" xdg="true"
-?package(%{name}): title="GTali" longtitle="Poker-like dice game" command="%{_bindir}/gtali" icon="gnome-gtali.png" needs="x11" section="More Applications/Games/Other" start_notify="true" xdg="true"
-?package(gnome-games): title="GNOME Robots" longtitle="GNOME Robots game" command="%{_bindir}/gnobots2" icon="gnome-gnobots.png" needs="x11" section="More Applications/Games/Arcade" startup_notify="true" xdg="true"
-?package(%{name}): icon="iagno.png" title="Iagno" longtitle="Reversi chess" command="%{_bindir}/iagno" needs="x11" section="More Applications/Games/Boards" startup_notify="true" xdg="true"
-?package(%{name}): title="GNOME Tetravex" longtitle="Tetravex puzzle" command="%{_bindir}/gnotravex" icon="gnome-gnotravex.png" needs="x11" section="More Applications/Games/Puzzles" startup_notify="true" xdg="true"
-?package(%{name}): title="AisleRiot" longtitle="Card-based Solitaire suite" command="%{_bindir}/sol" icon="gnome-aisleriot.png" needs="x11" section="More Applications/Games/Cards" startup_notify="true" xdg="true"
-?package(%{name}): title="Glines" longtitle="Color lines chess" command="%{_bindir}/glines" icon="glines.png" needs="x11" section="More Applications/Games/Boards" startup_notify="true" xdg="true"
-?package(gnome-games): title="Gnibbles" longtitle="Nibbles Game" command="%{_bindir}/gnibbles" icon="gnome-nibbles.png" needs="x11" icon="gnome-nibbles.png" section="More Applications/Games/Arcade" startup_notify="true" xdg="true"
-?package(%{name}): title="Gnect" longtitle="Four-in-a-row chess" command="%{_bindir}/gnect" needs="x11" section="More Applications/Games/Boards" icon="gnect-icon.png" startup_notify="true" xdg="true"
-?package(%{name}): title="Gnometris" longtitle="Tetris game" command="%{_bindir}/gnometris" icon="gnome-gtetris.png" needs="x11" section="More Applications/Games/Arcade" startup_notify="true" xdg="true"
-?package(%{name}): title="Blackjack" longtitle="Blackjack" command="%{_bindir}/blackjack" icon="gnome-blackjack.png" needs="x11" section="More Applications/Games/Cards" startup_notify="true" xdg="true"
-EOF
-desktop-file-install --vendor="" \
-  --add-category="X-MandrivaLinux-MoreApplications-Games-Puzzles" \
-  --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/{gnomine.desktop,mahjongg.desktop,gnotravex.desktop,gnome-sudoku.desktop}
-desktop-file-install --vendor="" \
-  --add-category="X-MandrivaLinux-MoreApplications-Games-Other" \
-  --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/{same-gnome.desktop,gtali.desktop}
-desktop-file-install --vendor="" \
-  --add-category="X-MandrivaLinux-MoreApplications-Games-Arcade" \
-  --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/{gnobots2.desktop,gnometris.desktop}
-desktop-file-install --vendor="" \
-  --add-category="X-MandrivaLinux-MoreApplications-Games-Boards" \
-  --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/{iagno.desktop,glines.desktop,gnect.desktop,glchess.desktop}
-desktop-file-install --vendor="" \
-  --add-category="X-MandrivaLinux-MoreApplications-Games-Cards" \
-  --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/{sol.desktop,blackjack.desktop}
 
 mkdir -p $RPM_BUILD_ROOT%{_miconsdir} $RPM_BUILD_ROOT%{_iconsdir} $RPM_BUILD_ROOT%{_liconsdir}
 
@@ -306,7 +274,6 @@ done
 %{_datadir}/gnibbles
 %{_datadir}/gnobots2
 %{_datadir}/pixmaps/*
-%{_menudir}/*
 %{_iconsdir}/*.png
 %{_liconsdir}/*.png
 %{_miconsdir}/*.png
