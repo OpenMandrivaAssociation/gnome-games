@@ -6,7 +6,7 @@
 
 Summary:	GNOME games
 Name:		gnome-games
-Version: 2.21.2
+Version: 2.21.3
 Release: %mkrel 1
 License:	GPL
 Group:		Games/Other
@@ -49,6 +49,7 @@ Requires: gnome-python-gconf
 Requires: gnome-python-gnomevfs
 Provides: glchess
 Obsoletes: glchess
+Conflicts: ggz-client-libs
 
 %description
 The gnome-games package includes games for the GNOME GUI desktop environment.
@@ -237,7 +238,7 @@ done
 %{_sysconfdir}/gconf/schemas/iagno.schemas
 %{_sysconfdir}/gconf/schemas/mahjongg.schemas
 %{_sysconfdir}/gconf/schemas/same-gnome.schemas
-
+%config(noreplace) %{_sysconfdir}/ggz.modules
 %{_bindir}/sol
 %{_bindir}/gnect
 %{_bindir}/blackjack
