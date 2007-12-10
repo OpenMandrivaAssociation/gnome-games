@@ -7,7 +7,7 @@
 Summary:	GNOME games
 Name:		gnome-games
 Version: 2.21.3
-Release: %mkrel 1
+Release: %mkrel 2
 License:	GPL
 Group:		Games/Other
 
@@ -50,7 +50,9 @@ Requires: gnome-python-gconf
 Requires: gnome-python-gnomevfs
 Provides: glchess
 Obsoletes: glchess
-Conflicts: ggz-client-libs
+Requires(post): ggz-client-libs
+Requires(preun): ggz-client-libs
+
 
 %description
 The gnome-games package includes games for the GNOME GUI desktop environment.
@@ -106,7 +108,12 @@ for omf in %buildroot%_datadir/omf/*/*-{??,??_??}.omf; do
 echo "%lang($(basename $omf|sed -e s/.*-// -e s/.omf//)) $(echo $omf|sed -e s!%buildroot!!)" >> %name.lang
 done
 
-rm -rf %buildroot/var/lib/scrollkeeper
+# we need this in %%post
+cp gnect/data/gnect-client.dsc $RPM_BUILD_ROOT%{_datadir}/ggz
+cp gnibbles/gnibbles-client.dsc $RPM_BUILD_ROOT%{_datadir}/ggz
+cp iagno/iagno-client.dsc $RPM_BUILD_ROOT%{_datadir}/ggz
+
+rm -rf %buildroot/var/lib/scrollkeeper $RPM_BUILD_ROOT%{_sysconfdir}/ggz.modules
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -116,9 +123,16 @@ rm -rf $RPM_BUILD_ROOT
 %update_scrollkeeper
 %{update_menus}
 %update_icon_cache hicolor
+ggz-config -i -f -m %{_datadir}/ggz/gnect-client.dsc >& /dev/null || :
+ggz-config -i -f -m %{_datadir}/ggz/gnibbles-client.dsc >& /dev/null || :
+ggz-config -i -f -m %{_datadir}/ggz/iagno-client.dsc >& /dev/null || :
 
 %preun
 %preun_uninstall_gconf_schemas %schemas
+ggz-config -r -m %{_datadir}/ggz/gnect-client.dsc >& /dev/null || :
+ggz-config -r -m %{_datadir}/ggz/gnibbles-client.dsc >& /dev/null || :
+ggz-config -r -m %{_datadir}/ggz/iagno-client.dsc >& /dev/null || :
+
 
 %postun
 %clean_scrollkeeper
@@ -239,7 +253,6 @@ done
 %{_sysconfdir}/gconf/schemas/iagno.schemas
 %{_sysconfdir}/gconf/schemas/mahjongg.schemas
 %{_sysconfdir}/gconf/schemas/same-gnome.schemas
-%config(noreplace) %{_sysconfdir}/ggz.modules
 %{_bindir}/sol
 %{_bindir}/gnect
 %{_bindir}/blackjack
