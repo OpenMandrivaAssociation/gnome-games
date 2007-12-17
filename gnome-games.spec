@@ -29,6 +29,7 @@ Buildrequires:  avahi-glib-devel avahi-client-devel
 Buildrequires:  libgstreamer0.10-devel
 Buildrequires:  libgcrypt-devel
 Buildrequires:  ggz-client-libs-devel
+Buildrequires:  ggz-server-devel
 Buildrequires:  perl-XML-Parser
 BuildRequires:  gob2
 BuildRequires:  automake1.7
