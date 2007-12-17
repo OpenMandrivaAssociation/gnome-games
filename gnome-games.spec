@@ -6,8 +6,8 @@
 
 Summary:	GNOME games
 Name:		gnome-games
-Version: 2.21.3
-Release: %mkrel 2
+Version: 2.21.4
+Release: %mkrel 1
 License:	GPL
 Group:		Games/Other
 
@@ -259,6 +259,10 @@ done
 %{_bindir}/glchess
 %{_bindir}/gnome-sudoku
 
+%{_bindir}/gnectd
+%{_bindir}/gnibblesd
+%{_bindir}/iagnod
+
 # these are setgid games so they can write in score files
 %defattr(2555, root, games)
 %if %enable_gnometris
@@ -276,6 +280,15 @@ done
 %{_bindir}/same-gnome
 
 %defattr(-, root, root)
+%dir %_prefix/etc/ggzd
+%dir %_prefix/etc/ggzd/games
+%_prefix/etc/ggzd/games/gnect-server.dsc
+%_prefix/etc/ggzd/games/gnibbles-server.dsc
+%_prefix/etc/ggzd/games/iagno-server.dsc
+%dir %_prefix/etc/ggzd/rooms
+%_prefix/etc/ggzd/rooms/gnect.room
+%_prefix/etc/ggzd/rooms/gnibbles.room
+%_prefix/etc/ggzd/rooms/iagno.room
 %py_puresitedir/glchess
 %py_puresitedir/gnome_sudoku
 %_datadir/icons/hicolor/*/apps/*
