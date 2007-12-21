@@ -37,6 +37,7 @@ BuildRequires:	gnome-common
 BuildRequires:	intltool
 BuildRequires:	desktop-file-utils
 
+BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 URL:		http://www.gnome.org/projects/gnome-games/
 Requires:	guile
 Requires(post):	scrollkeeper >= 0.3
