@@ -6,7 +6,7 @@
 
 Summary:	GNOME games
 Name:		gnome-games
-Version: 2.21.5
+Version: 2.21.90
 Release: %mkrel 1
 License:	GPL
 Group:		Games/Other
@@ -261,9 +261,9 @@ done
 %{_bindir}/glchess
 %{_bindir}/gnome-sudoku
 
-%{_bindir}/gnectd
-%{_bindir}/gnibblesd
-%{_bindir}/iagnod
+%_libdir/ggz/gnectd
+%_libdir/ggz/gnibblesd
+%_libdir/ggz/iagnod
 
 # these are setgid games so they can write in score files
 %defattr(2555, root, games)
