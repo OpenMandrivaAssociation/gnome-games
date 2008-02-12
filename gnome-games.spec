@@ -26,7 +26,7 @@ BuildRequires:	gnome-doc-utils
 Buildrequires:  librsvg-devel
 Buildrequires:  pygtk2.0-devel gnome-python-desktop
 Buildrequires:  avahi-glib-devel avahi-client-devel
-Buildrequires:  libgstreamer0.10-devel
+Buildrequires:  gstreamer0.10-devel
 Buildrequires:  libgcrypt-devel
 Buildrequires:  ggz-client-libs-devel
 Buildrequires:  ggz-server-devel
