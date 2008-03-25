@@ -7,7 +7,7 @@
 Summary:	GNOME games
 Name:		gnome-games
 Version: 2.22.0
-Release: %mkrel 1
+Release: %mkrel 2
 License:	GPL
 Group:		Games/Other
 
@@ -15,6 +15,8 @@ Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/gnome-games/gnome-games-%{version
 Source6:	%{name}-icons16.tar.bz2
 Source7:	%{name}-icons32.tar.bz2
 Source8:	%{name}-icons48.tar.bz2
+# (fc) 2.22.0-2mdv various svn fixes, including glchess startup on x86-64 (Mdv bug #37463)
+Patch0:		gnome-games-2.22.0-svnfixes.patch
 BuildRequires:	gettext
 BuildRequires:	guile-devel
 BuildRequires:	libgnomeui2-devel >= 2.0.0
@@ -81,6 +83,7 @@ GLChess		Chess with a 3D board.
 
 %prep
 %setup -q
+%patch0 -p1 -b .svnfixes
 
 %build
 %configure2_5x --enable-compile-warnings=no
