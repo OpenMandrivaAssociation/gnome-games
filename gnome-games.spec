@@ -30,6 +30,7 @@ Buildrequires:  libSDL_mixer-devel
 Buildrequires:  libgcrypt-devel
 Buildrequires:  ggz-client-libs-devel
 Buildrequires:  ggz-server-devel
+Buildrequires:  ggz-server
 Buildrequires:  perl-XML-Parser
 BuildRequires:  gob2
 BuildRequires:  automake1.7
