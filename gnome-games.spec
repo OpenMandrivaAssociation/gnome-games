@@ -6,15 +6,12 @@
 
 Summary:	GNOME games
 Name:		gnome-games
-Version: 2.22.1.1
+Version: 2.22.2
 Release: %mkrel 1
 License:	GPL
 Group:		Games/Other
 
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/gnome-games/gnome-games-%{version}.tar.bz2
-Source6:	%{name}-icons16.tar.bz2
-Source7:	%{name}-icons32.tar.bz2
-Source8:	%{name}-icons48.tar.bz2
 BuildRequires:	gettext
 BuildRequires:	guile-devel
 BuildRequires:	libgnomeui2-devel >= 2.0.0
@@ -98,12 +95,6 @@ rm -rf  $RPM_BUILD_ROOT%{_datadir}/applications/gnometris.desktop \
   $RPM_BUILD_ROOT%{_datadir}/pixmaps/gnometris \
   $RPM_BUILD_ROOT%{gamesdir}/gnometris.scores
 %endif
-
-mkdir -p $RPM_BUILD_ROOT%{_miconsdir} $RPM_BUILD_ROOT%{_iconsdir} $RPM_BUILD_ROOT%{_liconsdir}
-
-bzcat %{SOURCE6} | tar xf - -C $RPM_BUILD_ROOT%{_miconsdir}
-bzcat %{SOURCE7} | tar xf - -C $RPM_BUILD_ROOT%{_iconsdir}
-bzcat %{SOURCE8} | tar xf - -C $RPM_BUILD_ROOT%{_liconsdir}
 
 %{find_lang} %{name} --with-gnome --all-name
 for omf in %buildroot%_datadir/omf/*/*-{??,??_??}.omf; do 
@@ -304,9 +295,6 @@ done
 %{_datadir}/gnibbles
 %{_datadir}/gnobots2
 %{_datadir}/pixmaps/*
-%{_iconsdir}/*.png
-%{_liconsdir}/*.png
-%{_miconsdir}/*.png
 %attr(664, games, games) %ghost %{gamesdir}/*
 %dir %{_datadir}/omf/%name
 %{_datadir}/omf/*/*-C.omf
