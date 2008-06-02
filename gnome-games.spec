@@ -2,7 +2,7 @@
 
 %define schemas aisleriot blackjack glines gnect gnibbles gnobots2 gnometris gnomine gnotravex gnotski gtali iagno mahjongg same-gnome glchess
 
-%define gamesdir	%{_localstatedir}/games
+%define gamesdir	%{_localstatedir}/lib/games
 
 Summary:	GNOME games
 Name:		gnome-games
