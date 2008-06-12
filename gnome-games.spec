@@ -112,10 +112,12 @@ rm -rf %buildroot/var/lib/scrollkeeper $RPM_BUILD_ROOT%{_sysconfdir}/ggz.modules
 rm -rf $RPM_BUILD_ROOT
 
 %post
+%if %mdkversion < 200900
 %post_install_gconf_schemas %schemas
 %update_scrollkeeper
 %{update_menus}
 %update_icon_cache hicolor
+%endif
 ggz-config -i -f -m %{_datadir}/ggz/gnect-client.dsc >& /dev/null || :
 ggz-config -i -f -m %{_datadir}/ggz/gnibbles-client.dsc >& /dev/null || :
 ggz-config -i -f -m %{_datadir}/ggz/iagno-client.dsc >& /dev/null || :
@@ -127,10 +129,12 @@ ggz-config -r -m %{_datadir}/ggz/gnibbles-client.dsc >& /dev/null || :
 ggz-config -r -m %{_datadir}/ggz/iagno-client.dsc >& /dev/null || :
 
 
+%if %mdkversion < 200900
 %postun
 %clean_scrollkeeper
 %{clean_menus}
 %clean_icon_cache hicolor
+%endif
 
 %pre
 [ -d %{gamesdir} ] || mkdir -p %{gamesdir}
