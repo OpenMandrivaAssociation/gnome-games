@@ -2,13 +2,13 @@
 
 %define schemas aisleriot blackjack glines gnect gnibbles gnobots2 gnometris gnomine gnotravex gnotski gtali iagno mahjongg same-gnome glchess
 
-%define gamesdir	%{_localstatedir}/lib/games
+%define gamesdir	%{_localstatedir}/games
 
 Summary:	GNOME games
 Name:		gnome-games
-Version: 2.22.2.1
+Version: 2.22.3
 Release: %mkrel 1
-License:	GPL
+License:	GPLv2+
 Group:		Games/Other
 
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/gnome-games/gnome-games-%{version}.tar.bz2
