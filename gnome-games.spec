@@ -6,7 +6,7 @@
 
 Summary:	GNOME games
 Name:		gnome-games
-Version: 2.22.3
+Version: 2.23.4
 Release: %mkrel 1
 License:	GPLv2+
 Group:		Games/Other
@@ -278,15 +278,15 @@ done
 %{_bindir}/same-gnome
 
 %defattr(-, root, root)
-%dir %_prefix/etc/ggzd
-%dir %_prefix/etc/ggzd/games
-%_prefix/etc/ggzd/games/gnect-server.dsc
-%_prefix/etc/ggzd/games/gnibbles-server.dsc
-%_prefix/etc/ggzd/games/iagno-server.dsc
-%dir %_prefix/etc/ggzd/rooms
-%_prefix/etc/ggzd/rooms/gnect.room
-%_prefix/etc/ggzd/rooms/gnibbles.room
-%_prefix/etc/ggzd/rooms/iagno.room
+%dir %_sysconfdir/ggzd
+%dir %_sysconfdir/ggzd/games
+%_sysconfdir/ggzd/games/gnect-server.dsc
+%_sysconfdir/ggzd/games/gnibbles-server.dsc
+%_sysconfdir/ggzd/games/iagno-server.dsc
+%dir %_sysconfdir/ggzd/rooms
+%_sysconfdir/ggzd/rooms/gnect.room
+%_sysconfdir/ggzd/rooms/gnibbles.room
+%_sysconfdir/ggzd/rooms/iagno.room
 %py_puresitedir/glchess
 %py_puresitedir/gnome_sudoku
 %_datadir/icons/hicolor/*/apps/*
