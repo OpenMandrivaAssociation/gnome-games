@@ -36,7 +36,7 @@ BuildRequires:	intltool
 BuildRequires:	desktop-file-utils
 
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
-URL:		http://www.gnome.org/projects/gnome-games/
+URL:		http://live.gnome.org/GnomeGames/
 Requires:	guile
 Requires(post):	scrollkeeper >= 0.3
 Requires(postun):scrollkeeper >= 0.3
