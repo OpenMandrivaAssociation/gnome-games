@@ -6,7 +6,7 @@
 
 Summary:	GNOME games
 Name:		gnome-games
-Version: 2.24.1.1
+Version: 2.25.1
 Release: %mkrel 1
 License:	GPLv2+
 Group:		Games/Other
@@ -295,9 +295,6 @@ done
 %{_datadir}/glchess
 %{_datadir}/gnome-games
 %{_datadir}/gnome-sudoku
-%{_datadir}/gnect
-%{_datadir}/gnibbles
-%{_datadir}/gnobots2
 %{_datadir}/pixmaps/*
 %attr(664, games, games) %ghost %{gamesdir}/*
 %dir %{_datadir}/omf/%name
