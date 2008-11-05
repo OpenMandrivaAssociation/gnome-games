@@ -14,9 +14,10 @@ Group:		Games/Other
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/gnome-games/gnome-games-%{version}.tar.bz2
 BuildRequires:	gettext
 BuildRequires:	guile-devel
-BuildRequires:	libgnomeui2-devel >= 2.0.0
-Buildrequires:  libglade2.0-devel
 BuildRequires:  gtk+2-devel >= 2.5.4
+BuildRequires:  libGConf2-devel
+#gw libtool dep
+BuildRequires:  dbus-glib-devel
 BuildRequires:  libexpat-devel
 BuildRequires:	scrollkeeper
 BuildRequires:	gnome-doc-utils
@@ -28,11 +29,10 @@ Buildrequires:  libgcrypt-devel
 Buildrequires:  ggz-client-libs-devel
 Buildrequires:  ggz-server-devel
 Buildrequires:  ggz-server
-Buildrequires:  perl-XML-Parser
+BuildRequires:	intltool
 BuildRequires:  gob2
 BuildRequires:  automake1.7
 BuildRequires:	gnome-common
-BuildRequires:	intltool
 BuildRequires:	desktop-file-utils
 
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
