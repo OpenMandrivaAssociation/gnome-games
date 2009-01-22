@@ -4,10 +4,12 @@
 
 %define gamesdir	%{_localstatedir}/games
 
+%define build_staging 0
+
 Summary:	GNOME games
 Name:		gnome-games
 Version: 2.25.5
-Release: %mkrel 1
+Release: %mkrel 2
 License:	GPLv2+
 Group:		Games/Other
 
@@ -34,6 +36,8 @@ BuildRequires:  gob2
 BuildRequires:  automake1.7
 BuildRequires:	gnome-common
 BuildRequires:	desktop-file-utils
+BuildRequires:	clutter-cairo-devel >= 0.8
+#BuildRequires:	clutter-gtk-devel >= 0.8
 
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 URL:		http://live.gnome.org/GnomeGames/
@@ -51,7 +55,9 @@ Provides: glchess
 Obsoletes: glchess
 Requires(post): ggz-client-libs
 Requires(preun): ggz-client-libs
-
+%if %build_staging
+Requires: seed
+%endif
 
 %description
 The gnome-games package includes games for the GNOME GUI desktop environment.
@@ -75,13 +81,21 @@ Same GNOME      In a grid of stones of different colors, try remove stones
 Tali            Poker-like dice game without money, similar to Yahtzee.
 Tetravex        A puzzle where you match tiles edges together.
 GLChess		Chess with a 3D board.
+%if %build_staging
+Lights Off	Turn off all the lights
+%endif
 
 
 %prep
 %setup -q
 
 %build
-%configure2_5x --enable-compile-warnings=no
+%configure2_5x --enable-compile-warnings=no \
+%if %build_staging
+--enable-staging \
+%endif
+ --enable-clutter
+
 %make
 
 %install
@@ -256,7 +270,9 @@ done
 %{_bindir}/gnome-gnuchess
 %{_bindir}/glchess
 %{_bindir}/gnome-sudoku
-
+%if %build_staging
+%{_bindir}/lightsoff
+%endif
 %_libdir/ggz/gnectd
 %_libdir/ggz/gnibblesd
 %_libdir/ggz/iagnod
