@@ -8,7 +8,7 @@
 
 Summary:	GNOME games
 Name:		gnome-games
-Version: 2.25.90
+Version: 2.25.91
 Release: %mkrel 1
 License:	GPLv2+
 Group:		Games/Other
@@ -36,8 +36,9 @@ BuildRequires:  gob2
 BuildRequires:  automake1.7
 BuildRequires:	gnome-common
 BuildRequires:	desktop-file-utils
-BuildRequires:	clutter-cairo-devel >= 0.8
-#BuildRequires:	clutter-gtk-devel >= 0.8
+BuildRequires:	clutter-cairo-devel >= 0.8.2
+BuildRequires:	clutter-devel >= 0.8.7
+BuildRequires:	clutter-gtk-devel >= 0.8.2
 
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 URL:		http://live.gnome.org/GnomeGames/
