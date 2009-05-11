@@ -36,6 +36,7 @@ BuildRequires:  gob2
 BuildRequires:  automake1.7
 BuildRequires:	gnome-common
 BuildRequires:	desktop-file-utils
+BuildRequires:	libcanberra-devel
 BuildRequires:	clutter-devel >= 0.9.3
 BuildRequires:	clutter-gtk-devel >= 0.9
 
