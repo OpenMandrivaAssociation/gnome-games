@@ -8,7 +8,7 @@
 
 Summary:	GNOME games
 Name:		gnome-games
-Version: 2.26.1
+Version: 2.27.1
 Release: %mkrel 1
 License:	GPLv2+
 Group:		Games/Other
@@ -36,9 +36,8 @@ BuildRequires:  gob2
 BuildRequires:  automake1.7
 BuildRequires:	gnome-common
 BuildRequires:	desktop-file-utils
-BuildRequires:	clutter-cairo-devel >= 0.8.2
-BuildRequires:	clutter-devel >= 0.8.7
-BuildRequires:	clutter-gtk-devel >= 0.8.2
+BuildRequires:	clutter-devel >= 0.9.3
+BuildRequires:	clutter-gtk-devel >= 0.9
 
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 URL:		http://live.gnome.org/GnomeGames/
@@ -314,7 +313,7 @@ done
 %{_datadir}/gnome-sudoku
 %{_datadir}/pixmaps/*
 %attr(664, games, games) %ghost %{gamesdir}/*
-%dir %{_datadir}/omf/%name
+%dir %{_datadir}/omf/*
 %{_datadir}/omf/*/*-C.omf
 %_datadir/gnome-games-common/
 %_libdir/gnome-games
