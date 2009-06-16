@@ -39,6 +39,7 @@ BuildRequires:	desktop-file-utils
 BuildRequires:	libcanberra-devel
 BuildRequires:	clutter-devel >= 0.9.3-0.20090616
 BuildRequires:	clutter-gtk-devel >= 0.9.1
+BuildRequires:	check-devel
 
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 URL:		http://live.gnome.org/GnomeGames/
@@ -122,6 +123,9 @@ cp gnibbles/gnibbles-client.dsc $RPM_BUILD_ROOT%{_datadir}/ggz
 cp iagno/iagno-client.dsc $RPM_BUILD_ROOT%{_datadir}/ggz
 
 rm -rf %buildroot/var/lib/scrollkeeper $RPM_BUILD_ROOT%{_sysconfdir}/ggz.modules
+
+%check
+make check
 
 %clean
 rm -rf $RPM_BUILD_ROOT
