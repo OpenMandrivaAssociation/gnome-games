@@ -8,7 +8,7 @@
 
 Summary:	GNOME games
 Name:		gnome-games
-Version: 2.27.2
+Version: 2.27.3
 Release: %mkrel 1
 License:	GPLv2+
 Group:		Games/Other
@@ -37,8 +37,8 @@ BuildRequires:  automake1.7
 BuildRequires:	gnome-common
 BuildRequires:	desktop-file-utils
 BuildRequires:	libcanberra-devel
-BuildRequires:	clutter-devel >= 0.9.3
-BuildRequires:	clutter-gtk-devel >= 0.9
+BuildRequires:	clutter-devel >= 0.9.3-0.20090616
+BuildRequires:	clutter-gtk-devel >= 0.9.1
 
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 URL:		http://live.gnome.org/GnomeGames/
@@ -95,7 +95,7 @@ Lights Off	Turn off all the lights
 %if %build_staging
 --enable-staging \
 %endif
- --enable-clutter
+
 
 %make
 
