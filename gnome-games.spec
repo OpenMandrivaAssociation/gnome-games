@@ -1,6 +1,6 @@
 %define enable_gnometris 1
 
-%define schemas aisleriot blackjack glines gnect gnibbles gnobots2 gnometris gnomine gnotravex gnotski gtali iagno mahjongg same-gnome glchess
+%define schemas aisleriot blackjack glines gnect gnibbles gnobots2 gnometris gnome-sudoku gnomine gnotravex gnotski gtali iagno mahjongg same-gnome glchess
 
 %define gamesdir	%{_localstatedir}/games
 
@@ -8,7 +8,7 @@
 
 Summary:	GNOME games
 Name:		gnome-games
-Version: 2.27.3
+Version: 2.27.4
 Release: %mkrel 1
 License:	GPLv2+
 Group:		Games/Other
@@ -37,8 +37,8 @@ BuildRequires:  automake1.7
 BuildRequires:	gnome-common
 BuildRequires:	desktop-file-utils
 BuildRequires:	libcanberra-devel
-BuildRequires:	clutter-devel >= 0.9.3-0.20090616
-BuildRequires:	clutter-gtk-devel >= 0.9.1
+BuildRequires:	clutter-devel >= 0.9.6
+BuildRequires:	clutter-gtk-devel >= 0.9.2
 BuildRequires:	check-devel
 BuildRequires:	x11-server-xvfb
 
@@ -97,7 +97,7 @@ Lights Off	Turn off all the lights
 %if %build_staging
 --enable-staging \
 %endif
-
+--enable-aisleriot-clutter
 
 %make
 
@@ -108,8 +108,6 @@ GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 %makeinstall_std
 
 %if !%enable_gnometris
 rm -rf  $RPM_BUILD_ROOT%{_datadir}/applications/gnometris.desktop \
-  $RPM_BUILD_ROOT%{_datadir}/pixmaps/gnome-gtetris.png \
-  $RPM_BUILD_ROOT%{_datadir}/pixmaps/gnometris \
   $RPM_BUILD_ROOT%{gamesdir}/gnometris.scores
 %endif
 
@@ -263,6 +261,7 @@ done
 %{_sysconfdir}/gconf/schemas/gnibbles.schemas
 %{_sysconfdir}/gconf/schemas/gnobots2.schemas
 %{_sysconfdir}/gconf/schemas/gnometris.schemas
+%{_sysconfdir}/gconf/schemas/gnome-sudoku.schemas
 %{_sysconfdir}/gconf/schemas/gnomine.schemas
 %{_sysconfdir}/gconf/schemas/gnotravex.schemas
 %{_sysconfdir}/gconf/schemas/gnotski.schemas
@@ -278,6 +277,7 @@ done
 %{_bindir}/gnome-sudoku
 %if %build_staging
 %{_bindir}/lightsoff
+%_datadir/pixmaps/lightsoff
 %endif
 %_libdir/ggz/gnectd
 %_libdir/ggz/gnibblesd
@@ -317,7 +317,6 @@ done
 %{_datadir}/glchess
 %{_datadir}/gnome-games
 %{_datadir}/gnome-sudoku
-%{_datadir}/pixmaps/*
 %attr(664, games, games) %ghost %{gamesdir}/*
 %dir %{_datadir}/omf/*
 %{_datadir}/omf/*/*-C.omf
