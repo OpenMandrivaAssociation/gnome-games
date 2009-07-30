@@ -9,11 +9,12 @@
 Summary:	GNOME games
 Name:		gnome-games
 Version: 2.27.5
-Release: %mkrel 1
+Release: %mkrel 2
 License:	GPLv2+
 Group:		Games/Other
 
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/gnome-games/gnome-games-%{version}.tar.bz2
+Patch: gnome-games-2.27.5-clutter-1.0.patch
 BuildRequires:	gettext
 BuildRequires:	guile-devel
 BuildRequires:  gtk+2-devel >= 2.5.4
@@ -37,8 +38,8 @@ BuildRequires:  automake1.7
 BuildRequires:	gnome-common
 BuildRequires:	desktop-file-utils
 BuildRequires:	libcanberra-devel
-BuildRequires:	clutter-devel >= 0.9.6
-BuildRequires:	clutter-gtk-devel >= 0.9.2
+BuildRequires:	clutter-devel >= 1.0
+BuildRequires:	clutter-gtk-devel >= 0.10
 BuildRequires:	check-devel
 BuildRequires:	x11-server-xvfb
 
@@ -91,6 +92,8 @@ Lights Off	Turn off all the lights
 
 %prep
 %setup -q
+%patch -p1 -b .clutter
+autoreconf -fi
 
 %build
 %configure2_5x --enable-compile-warnings=no \
