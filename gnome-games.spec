@@ -40,6 +40,7 @@ BuildRequires:	desktop-file-utils
 BuildRequires:	libcanberra-devel
 BuildRequires:	clutter-devel >= 1.0
 BuildRequires:	clutter-gtk-devel >= 0.10
+BuildRequires:	gobject-introspection-devel gir-repository
 BuildRequires:	check-devel
 BuildRequires:	x11-server-xvfb
 
@@ -88,6 +89,14 @@ GLChess		Chess with a 3D board.
 %if %build_staging
 Lights Off	Turn off all the lights
 %endif
+
+%package devel
+Group: Development/Other
+Summary: Gnome games library introspection
+Requires: %name = %version-%release
+
+%description devel
+This contains GObject-Introspection support for the libraries of %name.
 
 
 %prep
@@ -325,3 +334,10 @@ done
 %{_datadir}/omf/*/*-C.omf
 %_datadir/gnome-games-common/
 %_libdir/gnome-games
+
+%files devel
+%defattr(-, root, root)
+%_libdir/girepository-1.0/GGZ-1.0.typelib
+%_libdir/girepository-1.0/GnomeGamesSupport-1.0.typelib
+%_datadir/gir-1.0/GGZ-1.0.gir
+%_datadir/gir-1.0/GnomeGamesSupport-1.0.gir
