@@ -9,7 +9,7 @@
 Summary:	GNOME games
 Name:		gnome-games
 Version: 2.27.5
-Release: %mkrel 2
+Release: %mkrel 3
 License:	GPLv2+
 Group:		Games/Other
 
