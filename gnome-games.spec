@@ -9,7 +9,7 @@
 Summary:	GNOME games
 Name:		gnome-games
 Version: 2.27.5
-Release: %mkrel 3
+Release: %mkrel 4
 License:	GPLv2+
 Group:		Games/Other
 
@@ -334,10 +334,10 @@ done
 %{_datadir}/omf/*/*-C.omf
 %_datadir/gnome-games-common/
 %_libdir/gnome-games
+%_libdir/girepository-1.0/GGZ-1.0.typelib
+%_libdir/girepository-1.0/GnomeGamesSupport-1.0.typelib
 
 %files devel
 %defattr(-, root, root)
-%_libdir/girepository-1.0/GGZ-1.0.typelib
-%_libdir/girepository-1.0/GnomeGamesSupport-1.0.typelib
 %_datadir/gir-1.0/GGZ-1.0.gir
 %_datadir/gir-1.0/GnomeGamesSupport-1.0.gir
