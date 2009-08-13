@@ -8,13 +8,12 @@
 
 Summary:	GNOME games
 Name:		gnome-games
-Version: 2.27.5
-Release: %mkrel 4
+Version: 2.27.90
+Release: %mkrel 1
 License:	GPLv2+
 Group:		Games/Other
 
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/gnome-games/gnome-games-%{version}.tar.bz2
-Patch: gnome-games-2.27.5-clutter-1.0.patch
 BuildRequires:	gettext
 BuildRequires:	guile-devel
 BuildRequires:  gtk+2-devel >= 2.5.4
@@ -101,8 +100,6 @@ This contains GObject-Introspection support for the libraries of %name.
 
 %prep
 %setup -q
-%patch -p1 -b .clutter
-autoreconf -fi
 
 %build
 %configure2_5x --enable-compile-warnings=no \
