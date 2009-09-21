@@ -8,7 +8,7 @@
 
 Summary:	GNOME games
 Name:		gnome-games
-Version: 2.27.92
+Version: 2.28.0
 Release: %mkrel 1
 License:	GPLv2+
 Group:		Games/Other
@@ -333,6 +333,7 @@ done
 %dir %{_datadir}/omf/*
 %{_datadir}/omf/*/*-C.omf
 %_datadir/gnome-games-common/
+%_mandir/man6/*.6*
 %_libdir/gnome-games
 %_libdir/girepository-1.0/GGZ-1.0.typelib
 %_libdir/girepository-1.0/GnomeGamesSupport-1.0.typelib
