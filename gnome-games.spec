@@ -9,7 +9,7 @@
 Summary:	GNOME games
 Name:		gnome-games
 Version: 2.28.0
-Release: %mkrel 1
+Release: %mkrel 2
 License:	GPLv2+
 Group:		Games/Other
 
@@ -264,7 +264,7 @@ done
 
 %files -f %{name}.lang
 %defattr(-, root, root)
-%doc AUTHORS ChangeLog NEWS TODO
+%doc AUTHORS NEWS TODO
 %{_sysconfdir}/gconf/schemas/aisleriot.schemas
 %{_sysconfdir}/gconf/schemas/blackjack.schemas
 %{_sysconfdir}/gconf/schemas/glchess.schemas
