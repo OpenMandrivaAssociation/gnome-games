@@ -1,6 +1,5 @@
-%define enable_gnometris 1
 
-%define schemas aisleriot blackjack glines gnect gnibbles gnobots2 gnometris gnome-sudoku gnomine gnotravex gnotski gtali iagno mahjongg same-gnome glchess
+%define schemas aisleriot glines gnect gnibbles gnobots2 gnome-sudoku gnomine gnotravex gnotski gtali iagno lightsoff mahjongg glchess quadrapassel swell-foop
 
 %define gamesdir	%{_localstatedir}/games
 
@@ -8,13 +7,13 @@
 
 Summary:	GNOME games
 Name:		gnome-games
-Version: 2.28.1
+Version: 2.29.3
 Release: %mkrel 1
 License:	GPLv2+
 Group:		Games/Other
 
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/gnome-games/gnome-games-%{version}.tar.bz2
-Patch: gnome-games-2.27.92-fix-linking.patch
+Patch: gnome-games-2.29.2-fix-linking.patch
 BuildRequires:	gettext
 BuildRequires:	guile-devel
 BuildRequires:  gtk+2-devel >= 2.5.4
@@ -29,9 +28,6 @@ Buildrequires:  pygtk2.0-devel gnome-python-desktop
 Buildrequires:  avahi-glib-devel avahi-client-devel
 Buildrequires:  libSDL_mixer-devel
 Buildrequires:  libgcrypt-devel
-Buildrequires:  ggz-client-libs-devel
-Buildrequires:  ggz-server-devel
-Buildrequires:  ggz-server
 BuildRequires:	intltool
 BuildRequires:  gob2
 BuildRequires:  automake1.7
@@ -41,7 +37,6 @@ BuildRequires:	libcanberra-devel
 BuildRequires:	clutter-devel >= 1.0
 BuildRequires:	clutter-gtk-devel >= 0.10
 BuildRequires:	gobject-introspection-devel gir-repository
-BuildRequires:	check-devel
 BuildRequires:	x11-server-xvfb
 
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
@@ -60,9 +55,7 @@ Provides: glchess
 Obsoletes: glchess
 Requires(post): ggz-client-libs
 Requires(preun): ggz-client-libs
-%if %build_staging
 Requires: seed
-%endif
 
 %description
 The gnome-games package includes games for the GNOME GUI desktop environment.
@@ -70,9 +63,7 @@ They include:
 
 AisleRiot       A compilation of seventy different solitaire card games.
 Ataxx           Disk-flipping game where players try and control most disks.
-Blackjack       The famous casino card game without any need to pay.
 Four-in-a-row   Players tries to make a line of four disks. (Connect Four)
-Gnometris       Tetris clone.
 Iagno           GNOME version of the popular Othello (R) chess.
 Klotski         A series of sliding block puzzles.
 Lines           Move balls around the grid to form lines of the same colour
@@ -86,9 +77,9 @@ Same GNOME      In a grid of stones of different colors, try remove stones
 Tali            Poker-like dice game without money, similar to Yahtzee.
 Tetravex        A puzzle where you match tiles edges together.
 GLChess		Chess with a 3D board.
-%if %build_staging
-Lights Off	Turn off all the lights
-%endif
+Lights Off	Turn off all the lights.
+Swell Foop	Clear the screen by removing groups of colored and shaped tiles
+Quadrapassel	Tetris clone.
 
 %package devel
 Group: Development/Other
@@ -118,20 +109,10 @@ rm -rf $RPM_BUILD_ROOT %name.lang
 
 GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 %makeinstall_std
 
-%if !%enable_gnometris
-rm -rf  $RPM_BUILD_ROOT%{_datadir}/applications/gnometris.desktop \
-  $RPM_BUILD_ROOT%{gamesdir}/gnometris.scores
-%endif
-
 %{find_lang} %{name} --with-gnome --all-name
 for omf in %buildroot%_datadir/omf/*/*-{??,??_??}.omf; do 
 echo "%lang($(basename $omf|sed -e s/.*-// -e s/.omf//)) $(echo $omf|sed -e s!%buildroot!!)" >> %name.lang
 done
-
-# we need this in %%post
-cp gnect/data/gnect-client.dsc $RPM_BUILD_ROOT%{_datadir}/ggz
-cp gnibbles/gnibbles-client.dsc $RPM_BUILD_ROOT%{_datadir}/ggz
-cp iagno/iagno-client.dsc $RPM_BUILD_ROOT%{_datadir}/ggz
 
 rm -rf %buildroot/var/lib/scrollkeeper $RPM_BUILD_ROOT%{_sysconfdir}/ggz.modules
 
@@ -148,15 +129,9 @@ rm -rf $RPM_BUILD_ROOT
 %{update_menus}
 %update_icon_cache hicolor
 %endif
-ggz-config -i -f -m %{_datadir}/ggz/gnect-client.dsc >& /dev/null || :
-ggz-config -i -f -m %{_datadir}/ggz/gnibbles-client.dsc >& /dev/null || :
-ggz-config -i -f -m %{_datadir}/ggz/iagno-client.dsc >& /dev/null || :
 
 %preun
 %preun_uninstall_gconf_schemas %schemas
-ggz-config -r -m %{_datadir}/ggz/gnect-client.dsc >& /dev/null || :
-ggz-config -r -m %{_datadir}/ggz/gnibbles-client.dsc >& /dev/null || :
-ggz-config -r -m %{_datadir}/ggz/iagno-client.dsc >& /dev/null || :
 
 
 %if %mdkversion < 200900
@@ -196,7 +171,6 @@ for i in \
 	gnobots2.robots_with_safe_teleport-safe \
 	gnobots2.robots_with_safe_teleport \
 	gnobots2.robots_with_safe_teleport-super-safe \
-	gnometris \
 	gnomine.Custom \
 	gnomine.Large \
 	gnomine.Medium \
@@ -252,9 +226,6 @@ for i in \
 	mahjongg.dragon \
 	mahjongg.bridges \
 	mahjongg.ziggurat \
-	same-gnome.Small \
-	same-gnome.Medium \
-	same-gnome.Large \
 ; do
 	%create_ghostfile %{gamesdir}/$i.scores games games 0664
 	if [ -f "%{gamesdir}/$i.scores" -a ! -s "%{gamesdir}/$i.scores" ]; then
@@ -266,40 +237,31 @@ done
 %defattr(-, root, root)
 %doc AUTHORS NEWS TODO
 %{_sysconfdir}/gconf/schemas/aisleriot.schemas
-%{_sysconfdir}/gconf/schemas/blackjack.schemas
 %{_sysconfdir}/gconf/schemas/glchess.schemas
 %{_sysconfdir}/gconf/schemas/glines.schemas
 %{_sysconfdir}/gconf/schemas/gnect.schemas
 %{_sysconfdir}/gconf/schemas/gnibbles.schemas
 %{_sysconfdir}/gconf/schemas/gnobots2.schemas
-%{_sysconfdir}/gconf/schemas/gnometris.schemas
 %{_sysconfdir}/gconf/schemas/gnome-sudoku.schemas
 %{_sysconfdir}/gconf/schemas/gnomine.schemas
 %{_sysconfdir}/gconf/schemas/gnotravex.schemas
 %{_sysconfdir}/gconf/schemas/gnotski.schemas
 %{_sysconfdir}/gconf/schemas/gtali.schemas
 %{_sysconfdir}/gconf/schemas/iagno.schemas
+%{_sysconfdir}/gconf/schemas/lightsoff.schemas
 %{_sysconfdir}/gconf/schemas/mahjongg.schemas
-%{_sysconfdir}/gconf/schemas/same-gnome.schemas
+%{_sysconfdir}/gconf/schemas/quadrapassel.schemas
+%{_sysconfdir}/gconf/schemas/swell-foop.schemas
 %{_bindir}/sol
 %{_bindir}/gnect
-%{_bindir}/blackjack
 %{_bindir}/gnome-gnuchess
 %{_bindir}/glchess
 %{_bindir}/gnome-sudoku
-%if %build_staging
 %{_bindir}/lightsoff
-%_datadir/pixmaps/lightsoff
-%endif
-%_libdir/ggz/gnectd
-%_libdir/ggz/gnibblesd
-%_libdir/ggz/iagnod
 
 # these are setgid games so they can write in score files
 %defattr(2555, root, games)
-%if %enable_gnometris
-%{_bindir}/gnometris
-%endif
+%{_bindir}/quadrapassel
 %{_bindir}/glines
 %{_bindir}/gnibbles
 %{_bindir}/gnobots2
@@ -309,23 +271,13 @@ done
 %{_bindir}/gtali
 %{_bindir}/iagno
 %{_bindir}/mahjongg
-%{_bindir}/same-gnome
+%{_bindir}/swell-foop
 
 %defattr(-, root, root)
-%dir %_sysconfdir/ggzd
-%dir %_sysconfdir/ggzd/games
-%_sysconfdir/ggzd/games/gnect-server.dsc
-%_sysconfdir/ggzd/games/gnibbles-server.dsc
-%_sysconfdir/ggzd/games/iagno-server.dsc
-%dir %_sysconfdir/ggzd/rooms
-%_sysconfdir/ggzd/rooms/gnect.room
-%_sysconfdir/ggzd/rooms/gnibbles.room
-%_sysconfdir/ggzd/rooms/iagno.room
 %py_puresitedir/glchess
 %py_puresitedir/gnome_sudoku
 %_datadir/icons/hicolor/*/apps/*
 %{_datadir}/applications/*
-%{_datadir}/ggz
 %{_datadir}/glchess
 %{_datadir}/gnome-games
 %{_datadir}/gnome-sudoku
@@ -335,10 +287,8 @@ done
 %_datadir/gnome-games-common/
 %_mandir/man6/*.6*
 %_libdir/gnome-games
-%_libdir/girepository-1.0/GGZ-1.0.typelib
 %_libdir/girepository-1.0/GnomeGamesSupport-1.0.typelib
 
 %files devel
 %defattr(-, root, root)
-%_datadir/gir-1.0/GGZ-1.0.gir
 %_datadir/gir-1.0/GnomeGamesSupport-1.0.gir
