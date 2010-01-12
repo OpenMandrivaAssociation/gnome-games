@@ -7,14 +7,12 @@
 
 Summary:	GNOME games
 Name:		gnome-games
-Version: 2.29.4
+Version: 2.29.5
 Release: %mkrel 1
 License:	GPLv2+
 Group:		Games/Other
 
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/gnome-games/gnome-games-%{version}.tar.bz2
-#gw missing from the tarball
-Source1:http://git.gnome.org/browse/gnome-games/plain/aisleriot/ar-style-private.h
 Patch: gnome-games-2.29.2-fix-linking.patch
 BuildRequires:	gettext
 BuildRequires:	guile-devel
@@ -94,7 +92,6 @@ This contains GObject-Introspection support for the libraries of %name.
 
 %prep
 %setup -q
-cp %SOURCE1 aisleriot/
 %patch -p1
 autoreconf -fi
 
