@@ -7,7 +7,7 @@
 
 Summary:	GNOME games
 Name:		gnome-games
-Version: 2.29.5
+Version: 2.29.6
 Release: %mkrel 1
 License:	GPLv2+
 Group:		Games/Other
@@ -110,7 +110,7 @@ rm -rf $RPM_BUILD_ROOT %name.lang
 GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 %makeinstall_std
 
 %{find_lang} %{name} --with-gnome --all-name
-for omf in %buildroot%_datadir/omf/*/*-{??,??_??}.omf; do 
+for omf in %buildroot%_datadir/omf/*/*-??*.omf; do 
 echo "%lang($(basename $omf|sed -e s/.*-// -e s/.omf//)) $(echo $omf|sed -e s!%buildroot!!)" >> %name.lang
 done
 
