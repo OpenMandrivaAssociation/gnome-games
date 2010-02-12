@@ -6,7 +6,7 @@
 Summary:	GNOME games
 Name:		gnome-games
 Version: 2.29.6
-Release: %mkrel 3
+Release: %mkrel 4
 License:	GPLv2+
 Group:		Games/Other
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/gnome-games/gnome-games-%{version}.tar.bz2
