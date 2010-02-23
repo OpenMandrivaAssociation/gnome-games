@@ -5,8 +5,8 @@
 
 Summary:	GNOME games
 Name:		gnome-games
-Version: 2.29.6
-Release: %mkrel 4
+Version: 2.29.91
+Release: %mkrel 1
 License:	GPLv2+
 Group:		Games/Other
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/gnome-games/gnome-games-%{version}.tar.bz2
@@ -424,8 +424,6 @@ done
 %{_datadir}/applications/gnotravex.desktop
 %{_iconsdir}/*/*/*/gnome-tetravex.*
 %{_mandir}/man6/gnotravex.*
-%dir %{_datadir}/omf/gnotravex
-%{_datadir}/omf/gnotravex/gnotravex-C.omf
 %attr(664, games, games) %ghost %{_localstatedir}/games/gnotravex.*.scores
 
 #-----------------------------------------------------------
