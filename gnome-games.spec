@@ -5,13 +5,12 @@
 
 Summary:	GNOME games
 Name:		gnome-games
-Version: 2.29.92
+Version: 2.30.0
 Release: %mkrel 1
 License:	GPLv2+
 Group:		Games/Other
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/gnome-games/gnome-games-%{version}.tar.bz2
 Patch0:		gnome-games-2.29.6-glchess-non_UTF-8.patch
-Patch1:		gnome-games-2.29.92-build-with-clutter-gtk-0.10.patch
 BuildRequires:	gettext
 BuildRequires:	guile-devel
 BuildRequires:  gtk+2-devel >= 2.5.4
@@ -719,7 +718,6 @@ This contains GObject-Introspection support for the libraries of %name.
 %prep
 %setup -q
 %apply_patches
-autoreconf -fi
 
 %build
 %configure2_5x --disable-schemas-install --enable-compile-warnings=no \
