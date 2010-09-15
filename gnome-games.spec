@@ -5,12 +5,13 @@
 
 Summary:	GNOME games
 Name:		gnome-games
-Version: 2.31.91.1
+Version: 2.31.92
 Release: %mkrel 1
 License:	GPLv2+
 Group:		Games/Other
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/gnome-games/gnome-games-%{version}.tar.bz2
 Patch0:		gnome-games-2.29.6-glchess-non_UTF-8.patch
+Patch1:		gnome-games-fix-gir-build.patch
 BuildRequires:	gettext
 BuildRequires:	guile-devel
 BuildRequires:  gtk+2-devel
@@ -35,7 +36,7 @@ BuildRequires:	clutter-devel >= 1.0
 BuildRequires:	clutter-gtk-devel >= 0.10
 #gw for gtk 3.0:
 #BuildRequires:	clutter-gtk-devel >= 0.90
-BuildRequires:	gobject-introspection-devel gir-repository
+BuildRequires:	gobject-introspection-devel >= 0.9.5 gir-repository
 BuildRequires:	x11-server-xvfb
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 URL:		http://live.gnome.org/GnomeGames/
@@ -720,13 +721,14 @@ This contains GObject-Introspection support for the libraries of %name.
 %prep
 %setup -q
 %apply_patches
+autoreconf -fi
 
 %build
 %configure2_5x --disable-schemas-install --enable-compile-warnings=no \
 %if %build_staging
 --enable-staging \
 %endif
---enable-aisleriot-clutter 
+
 #--with-gtk=3.0
 
 %make
