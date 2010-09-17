@@ -5,13 +5,12 @@
 
 Summary:	GNOME games
 Name:		gnome-games
-Version: 2.31.92
+Version: 2.31.92.1
 Release: %mkrel 1
 License:	GPLv2+
 Group:		Games/Other
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/gnome-games/gnome-games-%{version}.tar.bz2
 Patch0:		gnome-games-2.29.6-glchess-non_UTF-8.patch
-Patch1:		gnome-games-fix-gir-build.patch
 BuildRequires:	gettext
 BuildRequires:	guile-devel
 BuildRequires:  gtk+2-devel
@@ -107,6 +106,9 @@ Group: Games/Other
 Conflicts: gnome-games < 2.29.6-2
 Requires: %name-common = %{version}-%{release}
 Requires: guile
+#gw I don't really want KDE on my system
+#Suggests: kdegames4-core
+#Suggests: pysol-cardsets
 
 %description -n aisleriot
 A compilation of seventy different solitaire card games.
@@ -721,13 +723,15 @@ This contains GObject-Introspection support for the libraries of %name.
 %prep
 %setup -q
 %apply_patches
-autoreconf -fi
+#autoreconf -fi
 
 %build
 %configure2_5x --disable-schemas-install --enable-compile-warnings=no \
 %if %build_staging
 --enable-staging \
 %endif
+--with-kde-card-theme-path=%_datadir/apps/carddecks/ \
+--with-pysol-card-theme-path=%_datadir/games/pysol
 
 #--with-gtk=3.0
 
