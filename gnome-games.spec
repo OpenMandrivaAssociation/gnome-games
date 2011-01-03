@@ -6,7 +6,7 @@
 Summary:	GNOME games
 Name:		gnome-games
 Version: 2.32.1
-Release: %mkrel 1
+Release: %mkrel 2
 License:	GPLv2+
 Group:		Games/Other
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/gnome-games/gnome-games-%{version}.tar.bz2
@@ -27,7 +27,7 @@ Buildrequires:  libSDL_mixer-devel
 Buildrequires:  libgcrypt-devel
 BuildRequires:	intltool
 BuildRequires:  gob2
-BuildRequires:  automake1.7
+BuildRequires:  automake
 BuildRequires:	gnome-common
 BuildRequires:	desktop-file-utils
 BuildRequires:	libcanberra-gtk-devel
