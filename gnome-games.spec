@@ -14,10 +14,12 @@ Patch0:		gnome-games-2.29.6-glchess-non_UTF-8.patch
 BuildRequires:	gettext
 BuildRequires:	guile-devel
 BuildRequires:  gtk+2-devel
-BuildRequires:  libGConf2-devel
+BuildRequires:  libGConf2-devel GConf2
 #gw libtool dep
 BuildRequires:  dbus-glib-devel
 BuildRequires:  libexpat-devel
+BuildRequires:	libsm-devel
+BuildRequires:	libice-devel
 BuildRequires:	scrollkeeper
 BuildRequires:	gnome-doc-utils
 Buildrequires:  librsvg-devel
