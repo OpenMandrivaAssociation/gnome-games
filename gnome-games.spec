@@ -751,13 +751,13 @@ for pkg in %schemas; do
   done
 done
 
-rm -rf %buildroot/var/lib/scrollkeeper $RPM_BUILD_ROOT%{_sysconfdir}/ggz.modules
+rm -rf %buildroot/var/lib/scrollkeeper %{buildroot}%{_sysconfdir}/ggz.modules
 
 %check
 #xvfb-run %make check
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files
 %defattr(-, root, root)
