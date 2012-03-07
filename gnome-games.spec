@@ -1,47 +1,40 @@
-
-%define schemas aisleriot glines gnect gnibbles gnobots2 gnome-sudoku gnomine gnotravex gnotski gtali iagno lightsoff mahjongg glchess quadrapassel swell-foop
-
-%define build_staging 0
-
 Summary:	GNOME games
 Name:		gnome-games
-Version: 2.32.1
-Release: %mkrel 3
+Version:	3.2.1
+Release:	1
 License:	GPLv2+
 Group:		Games/Other
-Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/gnome-games/gnome-games-%{version}.tar.bz2
-Patch0:		gnome-games-2.29.6-glchess-non_UTF-8.patch
-BuildRequires:	gettext
-BuildRequires:	guile-devel
-BuildRequires:  gtk+2-devel
-BuildRequires:  libGConf2-devel GConf2
-#gw libtool dep
-BuildRequires:  dbus-glib-devel
-BuildRequires:  libexpat-devel
-BuildRequires:	libsm-devel
-BuildRequires:	libice-devel
-BuildRequires:	scrollkeeper
-BuildRequires:	gnome-doc-utils
-Buildrequires:  librsvg-devel
-Buildrequires:  pygtk2.0-devel gnome-python-desktop
-Buildrequires:  avahi-glib-devel avahi-client-devel
-Buildrequires:  libSDL_mixer-devel
-Buildrequires:  libgcrypt-devel
-BuildRequires:	intltool
-BuildRequires:  gob2
-BuildRequires:  automake
-BuildRequires:	gnome-common
-BuildRequires:	desktop-file-utils
-BuildRequires:	libcanberra-gtk-devel
-BuildRequires:	clutter-devel >= 1.0
-BuildRequires:	clutter-gtk-devel >= 0.10
-#gw for gtk 3.0:
-#BuildRequires:	clutter-gtk-devel >= 0.90
-BuildRequires:	gobject-introspection-devel >= 0.9.5 gir-repository
-BuildRequires:	x11-server-xvfb
-BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 URL:		http://live.gnome.org/GnomeGames/
-Requires: aisleriot
+Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/gnome-games/gnome-games-%{version}.tar.xz
+
+BuildRequires:	desktop-file-utils
+BuildRequires:	gnome-doc-utils
+BuildRequires:  gob2
+BuildRequires:	gnome-common
+BuildRequires:	intltool
+BuildRequires:	itstool
+BuildRequires:	x11-server-xvfb
+BuildRequires:	vala
+BuildRequires:	pkgconfig(cairo)
+BuildRequires:	pkgconfig(clutter-1.0)
+BuildRequires:	pkgconfig(clutter-gtk-1.0)
+BuildRequires:  pkgconfig(gconf-2.0)
+BuildRequires:	pkgconfig(gio-2.0)
+BuildRequires:	pkgconfig(gl)
+BuildRequires:	pkgconfig(glu)
+BuildRequires:	pkgconfig(gmodule-2.0)
+BuildRequires:	pkgconfig(gobject-2.0)
+BuildRequires:	pkgconfig(gtk+-3.0)
+BuildRequires:	pkgconfig(ice)
+BuildRequires:	pkgconfig(libcanberra-gtk3)
+BuildRequires:	pkgconfig(librsvg-2.0)
+BuildRequires:	pkgconfig(pygobject-2.0)
+BuildRequires:	pkgconfig(sm)
+BuildRequires:	pkgconfig(sqlite3)
+BuildRequires:	pkgconfig(x11)
+BuildRequires:	pkgconfig(gobject-introspection-1.0)
+
+#Requires: aisleriot
 Requires: glchess
 Requires: glines
 Requires: gnect
@@ -54,9 +47,11 @@ Requires: gnotravex
 Requires: gnotski
 Requires: gtali
 Requires: iagno
-Requires: lightsoff
+Obsoletes: lightsoff
 Requires: quadrapassel
-Requires: swell-foop
+Obsoletes: swell-foop
+# no more files in devel pkg
+Obsoletes: %{name}-devel
 
 %description
 The gnome-games package includes games for the GNOME GUI desktop environment.
@@ -91,89 +86,42 @@ Conflicts: gnome-games < 2.29.6-2
 %description common
 Common files for GNOME Games.
 
-%files common -f %name.lang
-%defattr(-, root, root)
-%{_libdir}/girepository-1.0/GnomeGamesSupport-1.0.typelib
+%files common -f %{name}.lang
 %{_libdir}/gnome-games
+%{_datadir}/glib-2.0/schemas/org.gnome.Games.WindowState.gschema.xml
 %dir %{_datadir}/gnome-games
-%{_datadir}/gnome-games/pixmaps
-%{_datadir}/gnome-games/sounds
-%{_datadir}/gnome-games/icons
-%{_datadir}/gnome-games-common
-
-#-----------------------------------------------------------
-%package -n aisleriot
-Summary: A compilation of seventy different solitaire card games
-Group: Games/Other
-Conflicts: gnome-games < 2.29.6-2
-Requires: %name-common = %{version}-%{release}
-Requires: guile
-#gw I don't really want KDE on my system
-#Suggests: kdegames4-core
-#Suggests: pysol-cardsets
-
-%description -n aisleriot
-A compilation of seventy different solitaire card games.
-
-%preun -n aisleriot
-%preun_uninstall_gconf_schemas aisleriot
-
-%files -n aisleriot -f aisleriot.lang
-%defattr(-, root, root)
-%{_sysconfdir}/gconf/schemas/aisleriot.schemas
-%attr(2555, root, games) %{_bindir}/sol
-%{_datadir}/applications/sol.desktop
-%{_datadir}/applications/freecell.desktop
-%{_iconsdir}/*/*/*/gnome-aisleriot.*
-%{_iconsdir}/*/*/*/gnome-freecell.*
-%{_mandir}/man6/sol.*
-%{_datadir}/gnome-games/aisleriot
-%dir %{_datadir}/omf/aisleriot
-%{_datadir}/omf/aisleriot/aisleriot-C.omf
+%{_datadir}/gnome-games/sounds 
+%{_datadir}/gnome-games/pixmaps 
 
 #-----------------------------------------------------------
 %package -n glchess
 Summary: Chess with a 3D board
 Group: Games/Other
 Conflicts: gnome-games < 2.29.6-2
-Requires: %name-common = %{version}-%{release}
-Requires: gnome-python
-Requires: gnome-python-gconf
-Suggests: python-gtkglext
-Suggests: python-opengl
+Requires: %{name}-common = %{version}-%{release}
 
 %description -n glchess
 Chess with a 3D board.
 
-%preun -n glchess
-%preun_uninstall_gconf_schemas glchess
-
 %files -n glchess -f glchess.lang
-%defattr(-, root, root)
-%{_sysconfdir}/gconf/schemas/glchess.schemas
 %attr(2555, root, games) %{_bindir}/glchess
 %attr(2555, root, games) %{_bindir}/gnome-gnuchess
-%{py_puresitedir}/glchess
 %{_datadir}/glchess
 %{_datadir}/applications/glchess.desktop
-%{_iconsdir}/*/*/*/gnome-glchess.*
+%{_datadir}/glib-2.0/schemas/org.gnome.glchess.gschema.xml
+%{_iconsdir}/*/*/*/*glchess.*
 %{_mandir}/man6/glchess.*
-%dir %{_datadir}/omf/glchess
-%{_datadir}/omf/glchess/glchess-C.omf
 
 #-----------------------------------------------------------
 %package -n glines
 Summary: Move balls
 Group: Games/Other
 Conflicts: gnome-games < 2.29.6-2
-Requires: %name-common = %{version}-%{release}
+Requires: %{name}-common = %{version}-%{release}
 
 %description -n glines
 Move balls around the grid to form lines of the same colour
 to make them disappear, while more balls keep dropping in.
-
-%preun -n glines
-%preun_uninstall_gconf_schemas glines
 
 %pre -n glines
 [ -d %{_localstatedir}/games ] || mkdir -p %{_localstatedir}/games
@@ -188,15 +136,12 @@ for i in glines.Large \
 done
 
 %files -n glines -f glines.lang
-%defattr(-, root, root)
-%{_sysconfdir}/gconf/schemas/glines.schemas
 %attr(2555, root, games) %{_bindir}/glines
 %{_datadir}/gnome-games/glines
 %{_datadir}/applications/glines.desktop
-%{_iconsdir}/*/*/*/gnome-glines.*
+%{_datadir}/glib-2.0/schemas/org.gnome.glines.gschema.xml
+%{_iconsdir}/*/*/*/*glines.*
 %{_mandir}/man6/glines.*
-%dir %{_datadir}/omf/glines
-%{_datadir}/omf/glines/glines-C.omf
 %attr(664, games, games) %ghost %{_localstatedir}/games/glines.*.scores
 
 #-----------------------------------------------------------
@@ -204,7 +149,7 @@ done
 Summary: A four-in-a-row game
 Group: Games/Other
 Conflicts: gnome-games < 2.29.6-2
-Requires: %name-common = %{version}-%{release}
+Requires: %{name}-common = %{version}-%{release}
 
 %description -n gnect
 gnect is a four-in-a-row game for the GNOME Project.
@@ -213,26 +158,21 @@ while trying to stop your opponent (human or computer) building a
 line of his or her own. A line can be horizontal, vertical or
 diagonal.
 
-%preun -n gnect
-%preun_uninstall_gconf_schemas gnect
-
 %files -n gnect -f gnect.lang
-%defattr(-, root, root)
 %{_sysconfdir}/gconf/schemas/gnect.schemas
 %attr(2555, root, games) %{_bindir}/gnect
 %{_datadir}/gnome-games/gnect
 %{_datadir}/applications/gnect.desktop
-%{_iconsdir}/*/*/*/gnome-gnect.*
+#{_datadir}/glib-2.0/schemas/org.gnome.gnect.gschema.xml
+%{_iconsdir}/*/*/*/*gnect.*
 %{_mandir}/man6/gnect.*
-%dir %{_datadir}/omf/gnect
-%{_datadir}/omf/gnect/gnect-C.omf
 
 #-----------------------------------------------------------
 %package -n gnibbles
 Summary: A worm game
 Group: Games/Other
 Conflicts: gnome-games < 2.29.6-2
-Requires: %name-common = %{version}-%{release}
+Requires: %{name}-common = %{version}-%{release}
 
 %description -n gnibbles
 Nibbles is a worm game for GNOME. The player controls a 2D
@@ -258,19 +198,14 @@ for i in \
   fi
 done
 
-%preun -n gnibbles
-%preun_uninstall_gconf_schemas gnibbles
-
 %files -n gnibbles -f gnibbles.lang
-%defattr(-, root, root)
 %{_sysconfdir}/gconf/schemas/gnibbles.schemas
 %attr(2555, root, games) %{_bindir}/gnibbles
 %{_datadir}/gnome-games/gnibbles
 %{_datadir}/applications/gnibbles.desktop
-%{_iconsdir}/*/*/*/gnome-gnibbles.*
+#{_datadir}/glib-2.0/schemas/org.gnome.gnibbles.gschema.xml
+%{_iconsdir}/*/*/*/*gnibbles.*
 %{_mandir}/man6/gnibbles.*
-%dir %{_datadir}/omf/gnibbles
-%{_datadir}/omf/gnibbles/gnibbles-C.omf
 %attr(664, games, games) %ghost %{_localstatedir}/games/gnibbles.*.scores
 
 #-----------------------------------------------------------
@@ -278,7 +213,7 @@ done
 Summary: Graphical version of text based robots game
 Group: Games/Other
 Conflicts: gnome-games < 2.29.6-2
-Requires: %name-common = %{version}-%{release}
+Requires: %{name}-common = %{version}-%{release}
 
 %description -n gnobots2
 Robots is a graphical version of the original text based
@@ -311,19 +246,15 @@ for i in \
   fi
 done
 
-%preun -n gnobots2
-%preun_uninstall_gconf_schemas gnobots2
-
 %files -n gnobots2 -f gnobots2.lang
-%defattr(-, root, root)
 %{_sysconfdir}/gconf/schemas/gnobots2.schemas
 %attr(2555, root, games) %{_bindir}/gnobots2
 %{_datadir}/gnome-games/gnobots2
 %{_datadir}/applications/gnobots2.desktop
-%{_iconsdir}/*/*/*/gnome-robots.*
+#{_datadir}/glib-2.0/schemas/org.gnome.gnobots2.gschema.xml
+%{_iconsdir}/*/*/*/*robots.*
+%{_datadir}/gnome-games/icons/hicolor/*/actions/teleport*.png
 %{_mandir}/man6/gnobots2.*
-%dir %{_datadir}/omf/gnobots2
-%{_datadir}/omf/gnobots2/gnobots2-C.omf
 %attr(664, games, games) %ghost %{_localstatedir}/games/gnobots2.*.scores
 
 #-----------------------------------------------------------
@@ -331,35 +262,28 @@ done
 Summary: Generate and play the popular Sudoku logic puzzle
 Group: Games/Other
 Conflicts: gnome-games < 2.29.6-2
-Requires: %name-common = %{version}-%{release}
-Requires: gnome-python
-Requires: gnome-python-gconf
+Requires: %{name}-common = %{version}-%{release}
 
 %description -n gnome-sudoku
 gnome-sudoku is an application to generate and play the popular
 Sudoku logic puzzle (also known as Number Place).
 
-%preun -n gnome-sudoku
-%preun_uninstall_gconf_schemas gnome-sudoku
-
 %files -n gnome-sudoku -f gnome-sudoku.lang
-%defattr(-, root, root)
 %{_sysconfdir}/gconf/schemas/gnome-sudoku.schemas
 %attr(2555, root, games) %{_bindir}/gnome-sudoku
 %{py_puresitedir}/gnome_sudoku
 %{_datadir}/gnome-sudoku
 %{_datadir}/applications/gnome-sudoku.desktop
+#{_datadir}/glib-2.0/schemas/org.gnome.gnome-sudoku.gschema.xml
 %{_iconsdir}/*/*/*/gnome-sudoku.*
 %{_mandir}/man6/gnome-sudoku.*
-%dir %{_datadir}/omf/gnome-sudoku
-%{_datadir}/omf/gnome-sudoku/gnome-sudoku-C.omf
 
 #-----------------------------------------------------------
 %package -n gnomine
 Summary: A puzzle game
 Group: Games/Other
 Conflicts: gnome-games < 2.29.6-2
-Requires: %name-common = %{version}-%{release}
+Requires: %{name}-common = %{version}-%{release}
 
 %description -n gnomine
 gnomine is a puzzle game where you locate mines floating in an
@@ -379,19 +303,13 @@ for i in \
   fi
 done
 
-%preun -n gnomine
-%preun_uninstall_gconf_schemas gnomine
-
 %files -n gnomine -f gnomine.lang
-%defattr(-, root, root)
-%{_sysconfdir}/gconf/schemas/gnomine.schemas
 %attr(2555, root, games) %{_bindir}/gnomine
 %{_datadir}/gnome-games/gnomine
 %{_datadir}/applications/gnomine.desktop
-%{_iconsdir}/*/*/*/gnome-mines.*
+%{_datadir}/glib-2.0/schemas/org.gnome.gnomine.gschema.xml
+%{_iconsdir}/*/*/*/gnomine.*
 %{_mandir}/man6/gnomine.*
-%dir %{_datadir}/omf/gnomine
-%{_datadir}/omf/gnomine/gnomine-C.omf
 %attr(664, games, games) %ghost %{_localstatedir}/games/gnomine.*.scores
 
 #-----------------------------------------------------------
@@ -399,7 +317,7 @@ done
 Summary: A simple puzzle game
 Group: Games/Other
 Conflicts: gnome-games < 2.29.6-2
-Requires: %name-common = %{version}-%{release}
+Requires: %{name}-common = %{version}-%{release}
 
 %description -n gnotravex
 GNOME Tetravex is a simple puzzle where pieces must be positioned so
@@ -421,15 +339,11 @@ for i in \
   fi
 done
 
-%preun -n gnotravex
-%preun_uninstall_gconf_schemas gnotravex
-
 %files -n gnotravex -f gnotravex.lang
-%defattr(-, root, root)
-%{_sysconfdir}/gconf/schemas/gnotravex.schemas
 %attr(2555, root, games) %{_bindir}/gnotravex
 %{_datadir}/applications/gnotravex.desktop
-%{_iconsdir}/*/*/*/gnome-tetravex.*
+%{_datadir}/glib-2.0/schemas/org.gnome.gnotravex.gschema.xml
+%{_iconsdir}/*/*/*/*tetravex.*
 %{_mandir}/man6/gnotravex.*
 %attr(664, games, games) %ghost %{_localstatedir}/games/gnotravex.*.scores
 
@@ -438,7 +352,7 @@ done
 Summary: Clone of the Klotski game
 Group: Games/Other
 Conflicts: gnome-games < 2.29.6-2
-Requires: %name-common = %{version}-%{release}
+Requires: %{name}-common = %{version}-%{release}
 
 %description -n gnotski
 The gnotski application is a clone of the Klotski game. The
@@ -492,27 +406,22 @@ for i in \
   fi
 done
 
-%preun -n gnotski
-%preun_uninstall_gconf_schemas gnotski
-
 %files -n gnotski -f gnotski.lang
-%defattr(-, root, root)
 %{_sysconfdir}/gconf/schemas/gnotski.schemas
 %attr(2555, root, games) %{_bindir}/gnotski
 %{_datadir}/gnome-games/gnotski
 %{_datadir}/applications/gnotski.desktop
-%{_iconsdir}/*/*/*/gnome-klotski.*
+#{_datadir}/glib-2.0/schemas/org.gnome.gnotski.gschema.xml
+%{_iconsdir}/*/*/*/*klotski.*
 %{_mandir}/man6/gnotski.*
-%dir %{_datadir}/omf/gnotski
-%{_datadir}/omf/gnotski/gnotski-C.omf
 %attr(664, games, games) %ghost %{_localstatedir}/games/gnotski.*.scores
 
 #-----------------------------------------------------------
 %package -n gtali
-Summary: Clone of the Klotski game
+Summary: Tali is like Yahtzee for GNOME
 Group: Games/Other
 Conflicts: gnome-games < 2.29.6-2
-Requires: %name-common = %{version}-%{release}
+Requires: %{name}-common = %{version}-%{release}
 
 %description -n gtali
 Tali is like Yahtzee for GNOME or like poker with dice. The player
@@ -532,19 +441,14 @@ for i in \
   fi
 done
 
-%preun -n gtali
-%preun_uninstall_gconf_schemas gtali
-
 %files -n gtali -f gtali.lang
-%defattr(-, root, root)
 %{_sysconfdir}/gconf/schemas/gtali.schemas
 %attr(2555, root, games) %{_bindir}/gtali
 %{_datadir}/gnome-games/gtali
 %{_datadir}/applications/gtali.desktop
-%{_iconsdir}/*/*/*/gnome-tali.*
+#{_datadir}/glib-2.0/schemas/org.gnome.gtali.gschema.xml
+%{_iconsdir}/*/*/*/*tali.*
 %{_mandir}/man6/gtali.*
-%dir %{_datadir}/omf/gtali
-%{_datadir}/omf/gtali/gtali-C.omf
 %attr(664, games, games) %ghost %{_localstatedir}/games/gtali.*.scores
 
 #-----------------------------------------------------------
@@ -552,7 +456,7 @@ done
 Summary: Computer version of game Reversi/Othello
 Group: Games/Other
 Conflicts: gnome-games < 2.29.6-2
-Requires: %name-common = %{version}-%{release}
+Requires: %{name}-common = %{version}-%{release}
 
 %description -n iagno
 Iagno is a computer version of the game Reversi, more popularly
@@ -563,51 +467,39 @@ many of your opponent's tiles to your color as possible without
 your opponent flipping your tiles.  This is done by trapping your
 opponent's tiles between two tiles of your own color.
 
-%preun -n iagno
-%preun_uninstall_gconf_schemas iagno
-
 %files -n iagno -f iagno.lang
-%defattr(-, root, root)
-%{_sysconfdir}/gconf/schemas/iagno.schemas
 %attr(2555, root, games) %{_bindir}/iagno
 %{_datadir}/gnome-games/iagno
 %{_datadir}/applications/iagno.desktop
-%{_iconsdir}/*/*/*/gnome-iagno.*
+%{_datadir}/glib-2.0/schemas/org.gnome.iagno.gschema.xml
+%{_iconsdir}/*/*/*/*iagno.*
 %{_mandir}/man6/iagno.*
-%dir %{_datadir}/omf/iagno
-%{_datadir}/omf/iagno/iagno-C.omf
 
 #-----------------------------------------------------------
 %package -n lightsoff
 Summary: Turn off all the lights
 Group: Games/Other
 Conflicts: gnome-games < 2.29.6-2
-Requires: %name-common = %{version}-%{release}
-Requires: gir-repository
+Requires: %{name}-common = %{version}-%{release}
 Requires: seed
 
 %description -n lightsoff
 Puzzle where all lights have to be switched off.
 
-%preun -n lightsoff
-%preun_uninstall_gconf_schemas lightsoff
-
-%files -n lightsoff -f lightsoff.lang
-%defattr(-, root, root)
-%{_sysconfdir}/gconf/schemas/lightsoff.schemas
-%attr(2555, root, games) %{_bindir}/lightsoff
-%{_datadir}/gnome-games/lightsoff
-%{_datadir}/applications/lightsoff.desktop
-%{_iconsdir}/*/*/*/gnome-lightsoff.*
-%dir %{_datadir}/omf/lightsoff
-%{_datadir}/omf/lightsoff/lightsoff-C.omf
+#files -n lightsoff
+#{_sysconfdir}/gconf/schemas/lightsoff.schemas
+#attr(2555, root, games) %{_bindir}/lightsoff
+#{_datadir}/gnome-games/lightsoff
+#{_datadir}/applications/lightsoff.desktop
+#{_datadir}/glib-2.0/schemas/org.gnome.lightsoff.gschema.xml
+#{_iconsdir}/*/*/*/lightsoff.*
 
 #-----------------------------------------------------------
 %package -n gnome-mahjongg
 Summary: Mahjongg tile solitaire game
 Group: Games/Other
 Conflicts: gnome-games < 2.29.6-2
-Requires: %name-common = %{version}-%{release}
+Requires: %{name}-common = %{version}-%{release}
 
 %description -n gnome-mahjongg
 A tile-based solitaire game. Remove tiles in matching pairs to
@@ -632,19 +524,13 @@ for i in \
   fi
 done
 
-%preun -n gnome-mahjongg
-%preun_uninstall_gconf_schemas mahjongg
-
 %files -n gnome-mahjongg -f mahjongg.lang
-%defattr(-, root, root)
-%{_sysconfdir}/gconf/schemas/mahjongg.schemas
 %attr(2555, root, games) %{_bindir}/mahjongg
 %{_datadir}/gnome-games/mahjongg
 %{_datadir}/applications/mahjongg.desktop
-%{_iconsdir}/*/*/*/gnome-mahjongg.*
+%{_datadir}/glib-2.0/schemas/org.gnome.mahjongg.gschema.xml
+%{_iconsdir}/*/*/*/*mahjongg.*
 %{_mandir}/man6/mahjongg.*
-%dir %{_datadir}/omf/mahjongg
-%{_datadir}/omf/mahjongg/mahjongg-C.omf
 %attr(664, games, games) %ghost %{_localstatedir}/games/mahjongg.*.scores
 
 #-----------------------------------------------------------
@@ -652,7 +538,7 @@ done
 Summary: Falling blocks game
 Group: Games/Other
 Conflicts: gnome-games < 2.29.6-2
-Requires: %name-common = %{version}-%{release}
+Requires: %{name}-common = %{version}-%{release}
 Provides: gnometris = %{version}-%{release}
 
 %description -n quadrapassel
@@ -670,19 +556,14 @@ for i in \
   fi
 done
 
-%preun -n quadrapassel
-%preun_uninstall_gconf_schemas quadrapassel
-
 %files -n quadrapassel -f quadrapassel.lang
-%defattr(-, root, root)
 %{_sysconfdir}/gconf/schemas/quadrapassel.schemas
 %attr(2555, root, games) %{_bindir}/quadrapassel
 %{_datadir}/gnome-games/quadrapassel
 %{_datadir}/applications/quadrapassel.desktop
-%{_iconsdir}/*/*/*/gnome-quadrapassel.*
+#{_datadir}/glib-2.0/schemas/org.gnome.quadrapassel.gschema.xml
+%{_iconsdir}/*/*/*/*quadrapassel.*
 %{_mandir}/man6/quadrapassel.*
-%dir %{_datadir}/omf/quadrapassel
-%{_datadir}/omf/quadrapassel/quadrapassel-C.omf
 %attr(664, games, games) %ghost %{_localstatedir}/games/quadrapassel.scores
 
 #-----------------------------------------------------------
@@ -690,78 +571,60 @@ done
 Summary: Colored ball puzzle game
 Group: Games/Other
 Conflicts: gnome-games < 2.29.6-2
-Requires: %name-common = %{version}-%{release}
-Requires: gir-repository
+Requires: %{name}-common = %{version}-%{release}
 Requires: seed
 
 %description -n swell-foop
 Remove blocks of balls of the same color in as few moves as
 possible. Try to remove all balls for a bonus.
 
-%preun -n swell-foop
-%preun_uninstall_gconf_schemas swell-foop
-
-%files -n swell-foop -f swell-foop.lang
-%defattr(-, root, root)
-%{_sysconfdir}/gconf/schemas/swell-foop.schemas
-%attr(2555, root, games) %{_bindir}/swell-foop
-%{_datadir}/gnome-games/swell-foop
-%{_datadir}/applications/swell-foop.desktop
-%{_iconsdir}/*/*/*/gnome-swell-foop.*
-%dir %{_datadir}/omf/swell-foop
-%{_datadir}/omf/swell-foop/swell-foop-C.omf
+#files -n swell-foop
+#{_sysconfdir}/gconf/schemas/swell-foop.schemas
+#attr(2555, root, games) %{_bindir}/swell-foop
+#{_datadir}/gnome-games/swell-foop
+#{_datadir}/applications/swell-foop.desktop
+#{_datadir}/glib-2.0/schemas/org.gnome.swell-foop.gschema.xml
+#{_iconsdir}/*/*/*/swell-foop.*
 
 #-----------------------------------------------------------
 
 %package devel
 Group: Development/Other
 Summary: Gnome games library introspection
-Requires: %name = %version-%release
+Requires: %{name} = %{version}-%{release}
 
 %description devel
-This contains GObject-Introspection support for the libraries of %name.
+This contains GObject-Introspection support for the libraries of %{name}.
 
 
 %prep
 %setup -q
 %apply_patches
-#autoreconf -fi
 
 %build
-%configure2_5x --disable-schemas-install --enable-compile-warnings=no \
-%if %build_staging
---enable-staging \
-%endif
---with-kde-card-theme-path=%_datadir/apps/carddecks/ \
---with-pysol-card-theme-path=%_datadir/games/pysol
-
-#--with-gtk=3.0
+%configure2_5x \
+	--disable-static \
+	--disable-schemas-install \
+	--enable-compile-warnings=no
 
 %make
 
 %install
-rm -rf %buildroot
-%makeinstall_std
+rm -rf %{buildroot}
+GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 %makeinstall_std
+%find_lang %{name}
 
-%{find_lang} %{name}
-for pkg in %schemas; do
-  %{find_lang} $pkg --with-gnome
-  for omf in `find %buildroot%_datadir/omf/$pkg/*.omf|grep -v \\\-C\\\.omf`; do 
-    echo "%lang($(basename $omf|sed -e s/.*-// -e s/.omf//)) $(echo $omf|sed -e s!%buildroot!!)" >> $pkg.lang
-  done
+%define games glines gnect gnibbles gnobots2 gnome-sudoku gnomine gnotravex gnotski gtali iagno mahjongg glchess quadrapassel 
+#lightsoff fswell-foop
+for game in %games; do
+	%find_lang $game --with-gnome
+	sed -i "s|%%lang(sr@latin) %{_datadir}/gnome/help/${game}/sr@latin/figures$||g" ${game}.lang
 done
 
-rm -rf %buildroot/var/lib/scrollkeeper %{buildroot}%{_sysconfdir}/ggz.modules
-
-%check
-#xvfb-run %make check
-
-%clean
-rm -rf %{buildroot}
+rm -rf %{buildroot}/var/lib/scrollkeeper %{buildroot}%{_sysconfdir}/ggz.modules
 
 %files
-%defattr(-, root, root)
 
-%files devel
-%defattr(-, root, root)
-%_datadir/gir-1.0/GnomeGamesSupport-1.0.gir
+#files devel
+#{_datadir}/gir-1.0/GnomeGamesSupport-1.0.gir
+
