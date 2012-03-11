@@ -1,7 +1,7 @@
 Summary:	GNOME games
 Name:		gnome-games
 Version:	3.2.1
-Release:	2
+Release:	3
 License:	GPLv2+
 Group:		Games/Other
 URL:		http://live.gnome.org/GnomeGames/
@@ -50,8 +50,6 @@ Requires: iagno
 Obsoletes: lightsoff
 Requires: quadrapassel
 Obsoletes: swell-foop
-# no more files in devel pkg
-Obsoletes: %{name}-devel
 
 %description
 The gnome-games package includes games for the GNOME GUI desktop environment.
@@ -87,7 +85,8 @@ Conflicts: gnome-games < 2.29.6-2
 Common files for GNOME Games.
 
 %files common -f %{name}.lang
-%{_libdir}/gnome-games
+%{_libdir}/gnome-games/libgames-support-gi.so.*
+%{_libdir}/gnome-games/GnomeGamesSupport-1.0.typelib
 %{_datadir}/glib-2.0/schemas/org.gnome.Games.WindowState.gschema.xml
 %dir %{_datadir}/gnome-games
 %{_datadir}/gnome-games/sounds 
@@ -596,7 +595,6 @@ Requires: %{name} = %{version}-%{release}
 %description devel
 This contains GObject-Introspection support for the libraries of %{name}.
 
-
 %prep
 %setup -q
 %apply_patches
@@ -625,6 +623,7 @@ rm -rf %{buildroot}/var/lib/scrollkeeper %{buildroot}%{_sysconfdir}/ggz.modules
 
 %files
 
-#files devel
-#{_datadir}/gir-1.0/GnomeGamesSupport-1.0.gir
+%files devel
+%{_libdir}/gnome-games/libgames-support-gi.so
+%{_libdir}/gnome-games/GnomeGamesSupport-1.0.gir
 
