@@ -47,9 +47,9 @@ Requires: gnotravex
 Requires: gnotski
 Requires: gtali
 Requires: iagno
-Obsoletes: lightsoff
+Requires: lightsoff
 Requires: quadrapassel
-Obsoletes: swell-foop
+Requires: swell-foop
 
 %description
 The gnome-games package includes games for the GNOME GUI desktop environment.
@@ -89,8 +89,8 @@ Common files for GNOME Games.
 %{_libdir}/gnome-games/GnomeGamesSupport-1.0.typelib
 %{_datadir}/glib-2.0/schemas/org.gnome.Games.WindowState.gschema.xml
 %dir %{_datadir}/gnome-games
-%{_datadir}/gnome-games/sounds 
-%{_datadir}/gnome-games/pixmaps 
+#{_datadir}/sounds 
+#{_datadir}/pixmaps 
 
 #-----------------------------------------------------------
 %package -n glchess
@@ -104,7 +104,7 @@ Chess with a 3D board.
 
 %files -n glchess -f glchess.lang
 %attr(2555, root, games) %{_bindir}/glchess
-%attr(2555, root, games) %{_bindir}/gnome-gnuchess
+#attr(2555, root, games) %{_bindir}/gnome-gnuchess
 %{_datadir}/glchess
 %{_datadir}/applications/glchess.desktop
 %{_datadir}/glib-2.0/schemas/org.gnome.glchess.gschema.xml
@@ -136,7 +136,7 @@ done
 
 %files -n glines -f glines.lang
 %attr(2555, root, games) %{_bindir}/glines
-%{_datadir}/gnome-games/glines
+%{_datadir}/glines
 %{_datadir}/applications/glines.desktop
 %{_datadir}/glib-2.0/schemas/org.gnome.glines.gschema.xml
 %{_iconsdir}/*/*/*/*glines.*
@@ -158,11 +158,10 @@ line of his or her own. A line can be horizontal, vertical or
 diagonal.
 
 %files -n gnect -f gnect.lang
-%{_sysconfdir}/gconf/schemas/gnect.schemas
 %attr(2555, root, games) %{_bindir}/gnect
-%{_datadir}/gnome-games/gnect
+%{_datadir}/gnect
 %{_datadir}/applications/gnect.desktop
-#{_datadir}/glib-2.0/schemas/org.gnome.gnect.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.gnect.gschema.xml
 %{_iconsdir}/*/*/*/*gnect.*
 %{_mandir}/man6/gnect.*
 
@@ -198,11 +197,10 @@ for i in \
 done
 
 %files -n gnibbles -f gnibbles.lang
-%{_sysconfdir}/gconf/schemas/gnibbles.schemas
 %attr(2555, root, games) %{_bindir}/gnibbles
-%{_datadir}/gnome-games/gnibbles
+%{_datadir}/gnibbles
 %{_datadir}/applications/gnibbles.desktop
-#{_datadir}/glib-2.0/schemas/org.gnome.gnibbles.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.gnibbles.gschema.xml
 %{_iconsdir}/*/*/*/*gnibbles.*
 %{_mandir}/man6/gnibbles.*
 %attr(664, games, games) %ghost %{_localstatedir}/games/gnibbles.*.scores
@@ -246,13 +244,12 @@ for i in \
 done
 
 %files -n gnobots2 -f gnobots2.lang
-%{_sysconfdir}/gconf/schemas/gnobots2.schemas
 %attr(2555, root, games) %{_bindir}/gnobots2
-%{_datadir}/gnome-games/gnobots2
+%{_datadir}/gnobots2
 %{_datadir}/applications/gnobots2.desktop
-#{_datadir}/glib-2.0/schemas/org.gnome.gnobots2.gschema.xml
-%{_iconsdir}/*/*/*/*robots.*
-%{_datadir}/gnome-games/icons/hicolor/*/actions/teleport*.png
+%{_datadir}/glib-2.0/schemas/org.gnome.gnobots2.gschema.xml
+%{_iconsdir}/*/*/*/gnobots2.*
+%{_iconsdir}/hicolor/*/actions/teleport*.png
 %{_mandir}/man6/gnobots2.*
 %attr(664, games, games) %ghost %{_localstatedir}/games/gnobots2.*.scores
 
@@ -268,12 +265,11 @@ gnome-sudoku is an application to generate and play the popular
 Sudoku logic puzzle (also known as Number Place).
 
 %files -n gnome-sudoku -f gnome-sudoku.lang
-%{_sysconfdir}/gconf/schemas/gnome-sudoku.schemas
 %attr(2555, root, games) %{_bindir}/gnome-sudoku
 %{py_puresitedir}/gnome_sudoku
 %{_datadir}/gnome-sudoku
 %{_datadir}/applications/gnome-sudoku.desktop
-#{_datadir}/glib-2.0/schemas/org.gnome.gnome-sudoku.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.gnome-sudoku.gschema.xml
 %{_iconsdir}/*/*/*/gnome-sudoku.*
 %{_mandir}/man6/gnome-sudoku.*
 
@@ -304,7 +300,7 @@ done
 
 %files -n gnomine -f gnomine.lang
 %attr(2555, root, games) %{_bindir}/gnomine
-%{_datadir}/gnome-games/gnomine
+%{_datadir}/gnomine
 %{_datadir}/applications/gnomine.desktop
 %{_datadir}/glib-2.0/schemas/org.gnome.gnomine.gschema.xml
 %{_iconsdir}/*/*/*/gnomine.*
@@ -340,9 +336,10 @@ done
 
 %files -n gnotravex -f gnotravex.lang
 %attr(2555, root, games) %{_bindir}/gnotravex
+%{_datadir}/gnotravex
 %{_datadir}/applications/gnotravex.desktop
 %{_datadir}/glib-2.0/schemas/org.gnome.gnotravex.gschema.xml
-%{_iconsdir}/*/*/*/*tetravex.*
+%{_iconsdir}/*/*/*/gnotravex.*
 %{_mandir}/man6/gnotravex.*
 %attr(664, games, games) %ghost %{_localstatedir}/games/gnotravex.*.scores
 
@@ -406,12 +403,11 @@ for i in \
 done
 
 %files -n gnotski -f gnotski.lang
-%{_sysconfdir}/gconf/schemas/gnotski.schemas
 %attr(2555, root, games) %{_bindir}/gnotski
-%{_datadir}/gnome-games/gnotski
+%{_datadir}/gnotski
 %{_datadir}/applications/gnotski.desktop
-#{_datadir}/glib-2.0/schemas/org.gnome.gnotski.gschema.xml
-%{_iconsdir}/*/*/*/*klotski.*
+%{_datadir}/glib-2.0/schemas/org.gnome.gnotski.gschema.xml
+%{_iconsdir}/*/*/*/gnotski.*
 %{_mandir}/man6/gnotski.*
 %attr(664, games, games) %ghost %{_localstatedir}/games/gnotski.*.scores
 
@@ -441,11 +437,10 @@ for i in \
 done
 
 %files -n gtali -f gtali.lang
-%{_sysconfdir}/gconf/schemas/gtali.schemas
 %attr(2555, root, games) %{_bindir}/gtali
-%{_datadir}/gnome-games/gtali
+%{_datadir}/gtali
 %{_datadir}/applications/gtali.desktop
-#{_datadir}/glib-2.0/schemas/org.gnome.gtali.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.gtali.gschema.xml
 %{_iconsdir}/*/*/*/*tali.*
 %{_mandir}/man6/gtali.*
 %attr(664, games, games) %ghost %{_localstatedir}/games/gtali.*.scores
@@ -468,7 +463,7 @@ opponent's tiles between two tiles of your own color.
 
 %files -n iagno -f iagno.lang
 %attr(2555, root, games) %{_bindir}/iagno
-%{_datadir}/gnome-games/iagno
+%{_datadir}/iagno
 %{_datadir}/applications/iagno.desktop
 %{_datadir}/glib-2.0/schemas/org.gnome.iagno.gschema.xml
 %{_iconsdir}/*/*/*/*iagno.*
@@ -485,13 +480,12 @@ Requires: seed
 %description -n lightsoff
 Puzzle where all lights have to be switched off.
 
-#files -n lightsoff
-#{_sysconfdir}/gconf/schemas/lightsoff.schemas
-#attr(2555, root, games) %{_bindir}/lightsoff
-#{_datadir}/gnome-games/lightsoff
-#{_datadir}/applications/lightsoff.desktop
-#{_datadir}/glib-2.0/schemas/org.gnome.lightsoff.gschema.xml
-#{_iconsdir}/*/*/*/lightsoff.*
+%files -n lightsoff -f lightsoff.lang
+%attr(2555, root, games) %{_bindir}/lightsoff
+%{_datadir}/lightsoff
+%{_datadir}/applications/lightsoff.desktop
+%{_datadir}/glib-2.0/schemas/org.gnome.lightsoff.gschema.xml
+%{_iconsdir}/*/*/*/lightsoff.*
 
 #-----------------------------------------------------------
 %package -n gnome-mahjongg
@@ -525,7 +519,7 @@ done
 
 %files -n gnome-mahjongg -f mahjongg.lang
 %attr(2555, root, games) %{_bindir}/mahjongg
-%{_datadir}/gnome-games/mahjongg
+%{_datadir}/mahjongg
 %{_datadir}/applications/mahjongg.desktop
 %{_datadir}/glib-2.0/schemas/org.gnome.mahjongg.gschema.xml
 %{_iconsdir}/*/*/*/*mahjongg.*
@@ -556,11 +550,10 @@ for i in \
 done
 
 %files -n quadrapassel -f quadrapassel.lang
-%{_sysconfdir}/gconf/schemas/quadrapassel.schemas
 %attr(2555, root, games) %{_bindir}/quadrapassel
-%{_datadir}/gnome-games/quadrapassel
+%{_datadir}/quadrapassel
 %{_datadir}/applications/quadrapassel.desktop
-#{_datadir}/glib-2.0/schemas/org.gnome.quadrapassel.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.quadrapassel.gschema.xml
 %{_iconsdir}/*/*/*/*quadrapassel.*
 %{_mandir}/man6/quadrapassel.*
 %attr(664, games, games) %ghost %{_localstatedir}/games/quadrapassel.scores
@@ -577,13 +570,26 @@ Requires: seed
 Remove blocks of balls of the same color in as few moves as
 possible. Try to remove all balls for a bonus.
 
-#files -n swell-foop
-#{_sysconfdir}/gconf/schemas/swell-foop.schemas
-#attr(2555, root, games) %{_bindir}/swell-foop
-#{_datadir}/gnome-games/swell-foop
-#{_datadir}/applications/swell-foop.desktop
-#{_datadir}/glib-2.0/schemas/org.gnome.swell-foop.gschema.xml
-#{_iconsdir}/*/*/*/swell-foop.*
+%pre -n swell-foop
+[ -d %{_localstatedir}/games ] || mkdir -p %{_localstatedir}/games
+for i in \
+  swell-foop.large \
+  swell-foop.normal \
+  swell-foop.small \
+; do
+  %create_ghostfile %{_localstatedir}/games/$i.scores games games 0664
+  if [ -f "%{_localstatedir}/games/$i.scores" -a ! -s "%{_localstatedir}/games/$i.scores" ]; then
+    echo "0.000000 `date +%s` gnome" >> %{_localstatedir}/games/$i.scores
+  fi
+done
+
+%files -n swell-foop -f swell-foop.lang
+%attr(2555, root, games) %{_bindir}/swell-foop
+%{_datadir}/gnome-games/swell-foop
+%{_datadir}/applications/swell-foop.desktop
+%{_datadir}/glib-2.0/schemas/org.gnome.swell-foop.gschema.xml
+%{_iconsdir}/*/*/*/swell-foop.*
+%attr(664, games, games) %ghost %{_localstatedir}/games/swell-foop.*.scores
 
 #-----------------------------------------------------------
 
@@ -608,15 +614,13 @@ This contains GObject-Introspection support for the libraries of %{name}.
 %make
 
 %install
-rm -rf %{buildroot}
-GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 %makeinstall_std
+%makeinstall_std
 %find_lang %{name}
 
-%define games glines gnect gnibbles gnobots2 gnome-sudoku gnomine gnotravex gnotski gtali iagno mahjongg glchess quadrapassel 
-#lightsoff fswell-foop
+%define games glines gnect gnibbles gnobots2 gnome-sudoku gnomine gnotravex gnotski gtali iagno lightsoff mahjongg glchess quadrapassel swell-foop
 for game in %games; do
 	%find_lang $game --with-gnome
-	sed -i "s|%%lang(sr@latin) %{_datadir}/gnome/help/${game}/sr@latin/figures$||g" ${game}.lang
+	#sed -i "s|%%lang(sr@latin) %{_datadir}/help/${game}/sr@latin/figures$||g" ${game}.lang
 done
 
 rm -rf %{buildroot}/var/lib/scrollkeeper %{buildroot}%{_sysconfdir}/ggz.modules
