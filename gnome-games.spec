@@ -13,6 +13,7 @@ BuildRequires:  gob2
 BuildRequires:	gnome-common
 BuildRequires:	intltool
 BuildRequires:	itstool
+BuildRequires:	libxml2-utils
 BuildRequires:	x11-server-xvfb
 BuildRequires:	vala
 BuildRequires:	pkgconfig(cairo)
