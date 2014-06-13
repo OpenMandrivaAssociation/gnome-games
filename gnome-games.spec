@@ -3,7 +3,7 @@
 Summary:	GNOME games
 Name:		gnome-games
 Version:	3.6.0
-Release:	6
+Release:	7
 License:	GPLv2+
 Group:		Games/Other
 Url:		http://live.gnome.org/GnomeGames/
