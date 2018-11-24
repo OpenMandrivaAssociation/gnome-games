@@ -1,7 +1,7 @@
 Summary:	GNOME games
 Name:		gnome-games
-Version:	3.12.0
-Release:	3
+Version:	3.30
+Release:	1
 License:	GPLv2+
 Group:		Games/Other
 URL:		https://wiki.gnome.org/Apps/Games
@@ -19,7 +19,7 @@ Requires:	gnome-tetravex
 Requires:	gnome-klotski
 Requires:	tali
 Requires:	iagno
-Requires:       quadrapassel
+Requires: quadrapassel
 Requires:	swell-foop
 Requires:	lightsoff
 Obsoletes:	gnome-games-common
