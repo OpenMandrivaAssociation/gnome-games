@@ -1,6 +1,6 @@
 Summary:	GNOME games
 Name:		gnome-games
-Version:	3.30
+Version:	3.34
 Release:	1
 License:	GPLv2+
 Group:		Games/Other
@@ -17,11 +17,11 @@ Requires:	gnome-sudoku
 Requires:	gnome-mines
 Requires:	gnome-tetravex
 Requires:	gnome-klotski
-Requires:	tali
-Requires:	iagno
+Requires: tali
+Requires: iagno
 Requires: quadrapassel
-Requires:	swell-foop
-Requires:	lightsoff
+Requires: swell-foop
+Requires: lightsoff
 Obsoletes:	gnome-games-common
 Obsoletes:	gnome-games-extra-data
 
