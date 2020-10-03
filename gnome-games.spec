@@ -6,22 +6,26 @@ License:	GPLv2+
 Group:		Games/Other
 URL:		https://wiki.gnome.org/Apps/Games
 BuildArch:	noarch
-Requires:	aisleriot
-Requires:	gnome-chess
-Requires:	five-or-more
-Requires:	four-in-a-row
-Requires:	gnome-nibbles
-Requires:	gnome-robots
-Requires:	gnome-mahjongg
-Requires:	gnome-sudoku
-Requires:	gnome-mines
-Requires:	gnome-tetravex
-Requires:	gnome-klotski
+Requires: aisleriot
+Requires: gnome-chess
+Requires: five-or-more
+Requires: four-in-a-row
+Requires: gnome-nibbles
+Requires: gnome-robots
+Requires: gnome-mahjongg
+Requires: gnome-sudoku
+Requires: gnome-mines
+Requires: gnome-tetravex
+Requires: gnome-klotski
 Requires: tali
 Requires: iagno
 Requires: quadrapassel
 Requires: swell-foop
 Requires: lightsoff
+Requires: hitori
+Requires: gnome-2048
+Requires: gnome-taquin
+
 Obsoletes:	gnome-games-common
 Obsoletes:	gnome-games-extra-data
 
