@@ -1,7 +1,7 @@
 Summary:	GNOME games
 Name:		gnome-games
-Version:	3.38
-Release:	2
+Version:	44.0
+Release:	1
 License:	GPLv2+
 Group:		Games/Other
 URL:		https://wiki.gnome.org/Apps/Games
