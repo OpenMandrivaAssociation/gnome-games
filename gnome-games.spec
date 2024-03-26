@@ -1,6 +1,6 @@
 Summary:	GNOME games
 Name:		gnome-games
-Version:	44.0
+Version:	46.0
 Release:	1
 License:	GPLv2+
 Group:		Games/Other
